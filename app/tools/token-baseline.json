@@ -1,0 +1,7 @@
+{
+  "generatedAt": "2026-10-15",
+  "note": "旧 theme.css 的 83 处历史违规已清零。颜色、时长、曲线和字号必须引用令牌。基线只降不升。",
+  "files": {
+    "src/renderer/src/styles/theme.css": 0
+  }
+}

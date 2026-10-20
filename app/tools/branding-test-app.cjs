@@ -1,0 +1,11 @@
+// Simulate Electron's productName-derived default inside a disposable AppData root.
+const { app } = require('electron')
+const path = require('node:path')
+const fs = require('node:fs')
+const appData = path.join(__dirname, '../.smoke/listening/default-appdata')
+fs.mkdirSync(appData, { recursive: true })
+app.setPath('appData', appData)
+app.setName('Stringmoon')
+app.setPath('userData', path.join(appData, 'Stringmoon'))
+app.getAppPath = () => path.join(__dirname, '..')
+require('../out/main/index.js')

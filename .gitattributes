@@ -1,0 +1,44 @@
+# 统一换行与二进制判定
+* text=auto
+
+# Windows 脚本必须保持 CRLF，否则 cmd/pwsh 解析会出问题
+*.ps1 text eol=crlf
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.sln text eol=crlf
+*.vcxproj text eol=crlf
+
+# 二进制：不要做换行转换与文本 diff
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.mp3 binary
+*.flac binary
+*.wav binary
+*.ogg binary
+*.mp4 binary
+*.webm binary
+*.exe binary
+*.zip binary
+*.dll binary
+*.lib binary
+*.pdb binary
+
+# 第三方源码保持逐字节原样：vendored 代码不做任何换行转换，
+# 否则与上游分发物失去可比性，也会破坏 LGPL「对应源码」的字节一致性。
+engine/third_party/** -text
+
+# 其余源码统一按仓库规范入库（工作区 CRLF / 仓库 LF）
+*.md text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+*.json text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+

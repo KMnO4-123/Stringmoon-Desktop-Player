@@ -1,0 +1,107 @@
+# Stringmoon CI — 应用侧门禁 + 引擎侧的按需构建
+#
+# 默认只跑 app 侧（windows-latest）：
+#   1. pnpm install --frozen-lockfile
+#   2. pnpm typecheck        （tsc --noEmit，node + web 两套 tsconfig）
+#   3. pnpm check:tokens     （设计令牌只允许引用 token，不许裸色值）
+#   4. pnpm check:css        （CSS 花括号/语法平衡）
+#   5. pnpm test:app         （node:test 单测，不含 Electron e2e）
+#
+# 不跑 pnpm test:electron / test:player / test:listening / test:startup：
+# 它们需要真实 Electron 单实例锁与独占音频设备，在 CI runner 上会互相打架并出声。
+#
+# 引擎侧是独立 job，只能手动触发（workflow_dispatch）：
+# 它需要 MSVC + CMake + 约 300MB 的第三方源码下载（GitHub CDN 在部分网络下不可达），
+# 因此**不放到 push/PR 必跑路径上**，避免红叉掩盖真正的问题。
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  app:
+    name: App gate (Windows / Node 24 / pnpm)
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: app/pnpm-lock.yaml
+
+      # Electron 二进制体积大且默认从 GitHub CDN 拉，CI 上改用 npmmirror 镜像；
+      # 与应用内 .npmrc 的配置保持一致。
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+        env:
+          ELECTRON_MIRROR: https://npmmirror.com/mirrors/electron/
+          ELECTRON_BUILDER_BINARIES_MIRROR: https://npmmirror.com/mirrors/electron-builder-binaries/
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Design token check
+        run: pnpm check:tokens
+
+      - name: CSS check
+        run: pnpm check:css
+
+      - name: Unit tests
+        run: pnpm test:app
+        env:
+          # 单测不联网：在线取词/流媒体在测试里被短路
+          TWILIGHT_OFFLINE: "1"
+
+  # ── 引擎侧（手动触发）─────────────────────────────────────────────────
+  # 注意：fetch-deps.ps1 会从 GitHub 下载 TagLib / SoXR / dr_libs 等第三方源码。
+  # 在某些网络环境下 raw.githubusercontent.com 不可达，这个 job 可能失败；
+  # 失败通常不是代码问题，先看「Fetch third-party sources」这一步的日志。
+  engine:
+    name: Engine build (Windows / MSVC) — manual
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: engine
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch third-party sources
+        shell: pwsh
+        run: ./tools/fetch-deps.ps1
+
+      - name: Configure and build (VS 2022 generator)
+        shell: pwsh
+        run: ./tools/build.ps1 -Configuration Release
+
+      - name: Engine self-test
+        shell: pwsh
+        run: ./bin/twilight-engine.exe --selftest
+
+      - name: Upload engine binary
+        uses: actions/upload-artifact@v4
+        with:
+          name: twilight-engine-win64
+          path: engine/bin/twilight-engine.exe
+          if-no-files-found: warn

@@ -1,0 +1,189 @@
+/*
+ * tokens.css —— 语义令牌层（DESIGN v5 §7）。
+ * 这是全项目唯一允许出现字面颜色的文件；组件只准引用 var(--token)。
+ * 强制：tools/check-tokens.mjs（棘轮基线 tools/token-baseline.json）。
+ */
+:root {
+  /* Approved Moonrise identity, used only for the finite startup sequence. */
+  --startup-void: #070609;
+  --startup-white: #fcfafc;
+  --startup-purple: #a180ca;
+  --startup-yellow: #ffeb91;
+  --startup-orange: #ffa968;
+  --startup-pink: #f665a6;
+  --startup-magenta: #c642bf;
+  --startup-violet: #6d44da;
+  --startup-wash: #8c3b8c12;
+  --startup-floor: #5045890a;
+  --startup-seed: #fff0d7;
+  --startup-seed-glow: #ffdfa6a0;
+  --startup-string: #a68abd65;
+  --startup-wave: #dfc7ee;
+  --startup-orbit: #ba9fcb3c;
+  --startup-halo: #ad5f9f12;
+  --startup-star: #d6c9e4;
+  --startup-vinyl: #111013;
+  --startup-groove: #262229;
+  --startup-vinyl-rim: #8c768b39;
+  --startup-label: #d4c9d7;
+  --startup-label-ink: #17121d;
+  --startup-ring: #b69dc557;
+  --startup-ring-lit: #f6d4b9;
+  --startup-type: #f4edf1;
+  --startup-sub: #a997ac;
+  --startup-signature: #615666;
+  --type-startup-brand: 76px;
+  --type-startup-sub: 12px;
+  --type-startup-signature: 8px;
+  /* ── 面（Nothing 真黑基底）── */
+  --surface-void: #000000;
+  --surface-app: #0a0a0b;
+  --surface-page: #111112;
+  --surface-panel: #17171a;
+  --surface-field: rgba(255, 255, 255, 0.03);
+
+  /* ── C3 文字 ── */
+  --c3-primary: #ffffff;
+  --c3-secondary: #b0b0b4;
+  --c3-muted: #929294;
+  --c3-dim: #6e6e72;
+
+  /* ── C1 光通道：只表达严重级别（白/琥珀/红），不表达"是什么状态" ── */
+  --c1-ok: #ffffff;
+  --c1-warn: #c9a227;
+  --c1-error: #d71921;
+
+  /* ── C2 形通道：几何为主，颜色只分虚实 ── */
+  --c2-line: #edeef0;
+  --c2-node-on: #ffffff;
+  --c2-node-off: #4a4a4e;
+  --c2-fill: #ffffff;
+
+  /* ── 强调（当前项/激活；不跟封面，固定点缀）── */
+  --accent: var(--c3-primary);
+  --accent-soft: rgba(255, 255, 255, 0.12);
+  /* 滑杆拇指/进度实色：--track-accent 会随封面取色变半透明，滑杆会退化成 Chromium 默认蓝。 */
+  --slider-accent: #c9cbd0;
+
+  /* ── 材质 ── */
+  --hairline: rgba(255, 255, 255, 0.07);
+  --hairline-strong: rgba(255, 255, 255, 0.1);
+  --glass-line: rgba(255, 255, 255, 0.08);
+  --glass-sheen: rgba(255, 255, 255, 0.1);
+  --shadow-ambient: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --shadow-ambient-lg: 0 12px 40px rgba(0, 0, 0, 0.35);
+  --press: rgba(255, 255, 255, 0.07);
+  --hover: rgba(255, 255, 255, 0.03);
+  --hover-strong: rgba(255, 255, 255, 0.06);
+  --cover-color-soft: rgb(110 110 120 / 0.5);
+  --control-track: #343437;
+  --mask-solid: #000000;
+  --error-surface: #251517;
+  --error-text: #ffd9d9;
+  --selection: rgba(255, 255, 255, 0.08);
+
+  /* Liquid-glass style material, reserved for the control layer. */
+  --liquid-tint: rgba(255, 255, 255, 0.055);
+  --liquid-rim: rgba(255, 255, 255, 0.24);
+  --liquid-rim-lit: rgba(255, 255, 255, 0.48);
+  --liquid-light: rgba(255, 255, 255, 0.15);
+  --liquid-highlight: rgba(255, 255, 255, 0.25);
+  --liquid-shade: rgba(0, 0, 0, 0.16);
+  --liquid-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  --liquid-blur: 18px;
+  --radius-capsule: 999px;
+  --record-body: #0d0e10;
+  --record-groove: #34373b;
+  --record-label: #cbd1c4;
+  --record-ink: #171a17;
+  --record-light: #ffffff;
+  --artwork-ink: #161a1e;
+  --artwork-blue: #bbcbd9;
+  --artwork-sage: #c2ceb9;
+  --artwork-sand: #d4cbb9;
+  --artwork-lilac: #cdc0d4;
+  --response-line: #c3e7d7;
+  --response-fill: #a9d5c1;
+  --response-grid: rgba(255, 255, 255, 0.09);
+  --track-accent: #d7d9db;
+  --track-wash: transparent;
+
+  /* ── 字体族 ── */
+  --font-serif: 'Georgia', 'Times New Roman', '思源宋体', 'Source Han Serif SC', serif;
+  --font-sans: 'Inter', 'Segoe UI', 'Microsoft YaHei', 'PingFang SC', sans-serif;
+  --font-mono: 'Cascadia Code', 'JetBrains Mono', 'Consolas', 'Microsoft YaHei', monospace;
+
+  --type-brand: 16px;
+  --type-heading: 24px;
+  --type-title: 26px;
+  --type-body: 14px;
+  --type-secondary: 13px;
+  --type-number: 12px;
+  --type-caption: 11px;
+  --type-lyric: 16px;
+  --type-lyric-active: 18px;
+  --type-hero: 38px;
+  --type-immersive: 30px;
+  --leading-title: 1.25;
+  --leading-body: 1.5;
+  --leading-lyric: 1.65;
+  --tracking-default: 0;
+  --weight-normal: 400;
+  --weight-label: 450;
+  --weight-heading: 500;
+
+  /* ── 缓动（六条；组件不得写 cubic-bezier 字面量）── */
+  --ease-immerse: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-dissolve: cubic-bezier(0.4, 0, 1, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-list: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-strong: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out-screen: cubic-bezier(0.77, 0, 0.175, 1);
+
+  /* ── 时长双轨（有手指 → Apple 快；界面自语 → 北欧慢）── */
+  --dur-gesture: 220ms;
+  --dur-state: 200ms;
+  --dur-geom: 400ms;
+  --dur-env: 600ms;
+  --dur-flash: 160ms;
+  --dur-hover: 100ms;
+  --dur-breath: 4s;
+  --dur-warning: 2s;
+  --dur-progress: 1.6s;
+  /* 登录等待态的小呼吸：2s（低频操作里唯一有因果的循环；reduced-motion 下会被全局禁用） */
+  --dur-login-wait: 2s;
+  --ease-breath: ease-in-out;
+
+  /* ── 圆角 ── */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+
+  /* ── 空间（北欧：同组 4 / 组间 16 / 区段 40）── */
+  /* 曲库行高：min-height、content-visibility 的占位估计、以及**列表虚拟化的固定行高**，
+     三处共用这一个值。虚拟化按它算窗口，CSS 改了这个数而 JS 不知道就会错位 ——
+     所以 JS 侧是**读这个 token**，不是另写一个常量。 */
+  --row-height: 64px;
+
+  /* 播放栏高度：外壳网格行与 .playbar 必须同一个值，否则两者会差出一像素级错位。 */
+  --playbar-height: 76px;
+
+  --space-1: 4px;
+  --space-tight: 8px;
+  --space-2: 16px;
+  --space-inset: 24px;
+  --space-page: 32px;
+  --space-3: 40px;
+}
+
+.app-shell {
+  --cover-paper: hsl(var(--track-hue, 160) 34% 70%);
+  --cover-paper-shade: hsl(var(--track-hue, 160) 26% 51%);
+  --response-line: var(--track-accent);
+  --response-fill: var(--track-accent);
+}
+.app-shell[data-theme-follow='true'] {
+  --track-accent: hsl(var(--track-hue, 160) 42% 73%);
+  --track-wash: hsl(var(--track-hue, 160) 37% 21% / 0.32);
+  --response-fill: var(--track-accent);
+}

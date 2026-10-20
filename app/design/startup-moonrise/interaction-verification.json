@@ -1,0 +1,21 @@
+{
+  "checks": [
+    "replay",
+    "pause",
+    "chapter seek",
+    "skip",
+    "reduced motion",
+    "reduced motion reversal",
+    "system reduced motion",
+    "MP4 decode",
+    "video size",
+    "no browser errors"
+  ],
+  "video": {
+    "duration": 4.6672,
+    "width": 1280,
+    "height": 800
+  },
+  "bytes": 1305039,
+  "errors": []
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tt xmlns="http://www.w3.org/ns/ttml" xmlns:ttm="http://www.w3.org/ns/ttml#metadata" xmlns:tts="http://www.w3.org/ns/ttml#styling" xmlns:itunes="http://itunes.apple.com/lyric-ttml-extensions" xmlns:amll="http://www.example.com/ns/amll" xml:lang="ja" itunes:timing="Word">
+<head><metadata xmlns="">
+<ttm:agent type="person" xml:id="v1"></ttm:agent>
+<amll:meta key="musicName" value="雨上がり"></amll:meta>
+<amll:meta key="artists" value="Synth Artist"></amll:meta>
+<iTunesMetadata xmlns="http://music.apple.com/lyric-ttml-internal">
+<translations><translation type="subtitle" xml:lang="en"><text for="L3">head english</text></translation><translation type="subtitle" xml:lang="zh-Hans"><text for="L3">头信息中文翻译</text></translation></translations>
+<transliterations><transliteration xml:lang="ja-Latn"><text for="L3">sho sen na shi</text></transliteration></transliterations>
+</iTunesMetadata>
+</metadata></head>
+<body dur="00:20.000">
+<div begin="00:00.500" end="00:20.000">
+<p begin="00:00.500" end="00:03.000" ttm:agent="v1" itunes:key="L1"><span begin="00:00.500" end="00:01.000">雨</span><span begin="00:01.000" end="00:01.500">上がり</span><span ttm:role="x-translation" xml:lang="zh-CN">雨停了</span><span ttm:role="x-roman">a me a ga ri</span></p>
+<p begin="00:03.000" end="00:06.000" ttm:agent="v1" itunes:key="L2"><span begin="00:03.000" end="00:04.000">傘 &amp; 街</span><span ttm:role="x-bg" begin="00:04.000" end="00:05.500"><span begin="00:04.000" end="00:04.700">(信</span><span begin="00:04.700" end="00:05.500">じてる)</span><span ttm:role="x-translation" xml:lang="zh-CN">我如此坚信</span></span></p>
+<p begin="00:06.000" end="00:09.000" ttm:agent="v1" itunes:key="L3"><span tts:ruby="container"><span tts:ruby="base">所</span><span tts:ruby="textContainer"><span tts:ruby="text" begin="00:06.000" end="00:06.400">しょ</span></span></span><span tts:ruby="container"><span tts:ruby="base">詮</span><span tts:ruby="textContainer"><span tts:ruby="text" begin="00:06.400" end="00:06.700">せ</span><span tts:ruby="text" begin="00:06.700" end="00:07.000">ん</span></span></span><span begin="00:07.000" end="00:08.000">なし</span><span ttm:role="x-translation" xml:lang="en">it is the same</span><span ttm:role="x-translation" xml:lang="zh-Hans">都一样</span></p>
+<p begin="00:09.000" end="00:12.000" ttm:agent="v1" itunes:key="L4">行级歌词没有字级时间</p>
+</div>
+</body></tt>

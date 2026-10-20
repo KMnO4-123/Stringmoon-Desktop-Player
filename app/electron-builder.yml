@@ -1,0 +1,79 @@
+# electron-builder 打包配置（2026-10-17 起：用户要求出安装包 + 无痛升级）
+#
+# 关键设计：
+#  - appId 一经发布**永不修改**：NSIS 的升级/卸载身份由它派生，改了会变成两个应用。
+#  - userData 路径与安装包无关：主进程把数据钉在 %APPDATA%\twilight-echo-app
+#    （见 main/index.ts），所以覆盖安装/自动更新不会换数据目录。
+#  - 引擎是独立 exe，放 extraResources/engine/bin；主进程按 resources 路径探测，
+#    不进 asar（C++ 进程不能被 asar 读取）。
+#  - publish.url 是**占位**：运行时只有显式配置了更新源（TWILIGHT_UPDATE_URL 或
+#    userData/update-feed.json）才会检查更新，不会偷偷打占位域名。
+
+appId: com.stringmoon.twilightecho
+productName: Stringmoon
+copyright: Copyright © 2026 Stringmoon
+
+directories:
+  output: release
+  buildResources: build
+
+files:
+  - out/**/*
+  - package.json
+  - resources/stringmoon.ico
+  - resources/stringmoon-icon.png
+  - "!**/*.map"
+  - "!**/.smoke/**"
+  - "!tools/**"
+  - "!fixtures/**"
+  - "!resources/icon-archive/**"
+
+extraResources:
+  - from: ../engine/bin/twilight-engine.exe
+    to: engine/bin/twilight-engine.exe
+  # v0.4.0：内置运行环境（node.exe + 两个平台服务端及其依赖）。
+  # 打成 zip 再打包：electron-builder 的 extraResources 会丢掉 any node_modules 目录
+  # （filter 也救不回来），而 Node 解析模块必须有名为 node_modules 的目录。
+  # 首启由 main/streaming/bundled-runtime.ts 解压到 userData/runtime 并写 streaming.json。
+  - from: resources/runtime.zip
+    to: runtime.zip
+
+asar: true
+npmRebuild: false
+
+# 直接用项目里已经装好的 Electron 运行时打包：本机下载 zip 的链路不稳，
+# electronDist 指向 node_modules/electron/dist 可完全跳过下载（版本仍由 package.json 钉住）。
+electronDist: node_modules/.pnpm/electron@44.7.2/node_modules/electron/dist
+
+# 本机 GitHub CDN 不稳定：electron 二进制走 npmmirror（.npmrc 的 electron_mirror 只影响 npm 层，
+# electron-builder 用自己的下载器，必须在这里/环境变量里显式指定）。
+electronDownload:
+  mirror: https://npmmirror.com/mirrors/electron/
+
+win:
+  icon: resources/stringmoon.ico
+  requestedExecutionLevel: asInvoker
+  target:
+    - target: nsis
+      arch:
+        - x64
+  artifactName: ${productName}-Setup-${version}.${ext}
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowElevation: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: Stringmoon
+  # 卸载**保留**用户数据：重装/换版本不丢曲库、歌单、登录态与设置。
+  deleteAppDataOnUninstall: false
+  runAfterFinish: true
+  installerIcon: resources/stringmoon.ico
+  uninstallerIcon: resources/stringmoon.ico
+  installerHeaderIcon: resources/stringmoon.ico
+
+publish:
+  provider: generic
+  url: https://example.com/stringmoon/releases/

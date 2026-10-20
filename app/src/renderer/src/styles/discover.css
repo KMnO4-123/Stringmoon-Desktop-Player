@@ -1,0 +1,686 @@
+/*
+ * 发现页（v4）。全部视觉值走 tokens.css；本文件不得出现字面颜色/裸时长/裸字号。
+ *
+ * 布局是这一页的硬要求：「操作的、控制的相关界面横向占满，不要居中一点点」。
+ * 所以 .discover-page 不设 max-width，区块自身用 6 列卡片网格撑满主区域宽度，
+ * 窄窗口才逐级降列；任何一级都不做 max-width 居中。
+ */
+
+.discover-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  min-height: 100%;
+  /* 与 .sound-page 同一口径：左右用页面级留白，不加 max-width。 */
+  padding: var(--space-2) var(--space-page) var(--space-3);
+  background: radial-gradient(circle at 88% -10%, var(--track-wash), transparent 42%);
+}
+
+/* ---- hero --------------------------------------------------------- */
+
+.discover-hero {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.discover-hero-copy {
+  min-width: 0;
+}
+
+.discover-hero-copy h1 {
+  font-size: var(--type-heading);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-title);
+}
+
+/* 副标题不设 max-width：这一页的要求是横向铺满，不是居中窄栏；
+   中文在任意位置可断行，撑满不会读不动。 */
+.discover-hero-copy p {
+  margin-top: var(--space-1);
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+  line-height: var(--leading-body);
+}
+
+.discover-hero-side {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* v6.3：平台切换。用分段控件而不是下拉：只有两个平台，切换是高频动作，
+   下拉会多一次点击且收起后看不见当前平台。 */
+.discover-platform-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px;
+  gap: 2px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-capsule);
+  background: var(--surface-field);
+}
+
+.discover-platform-tab {
+  min-height: 24px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-capsule);
+  background: transparent;
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--dur-state) var(--ease-list), background-color var(--dur-state) var(--ease-list);
+}
+
+.discover-platform-tab:hover {
+  color: var(--c3-primary);
+}
+
+.discover-platform-tab[aria-pressed='true'] {
+  background: var(--selection);
+  color: var(--c3-primary);
+}
+
+.discover-chips {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  flex-wrap: wrap;
+}
+
+.discover-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 26px;
+  padding: 0 var(--space-tight);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-capsule);
+  background: var(--surface-field);
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+  white-space: nowrap;
+}
+
+.discover-chip[data-state='ok'] {
+  color: var(--c3-secondary);
+  border-color: var(--hairline-strong);
+}
+
+.discover-chip-action {
+  cursor: pointer;
+  transition: color var(--dur-state) var(--ease-list), border-color var(--dur-state) var(--ease-list);
+}
+
+.discover-chip-action:hover {
+  color: var(--c3-primary);
+  border-color: var(--hairline-strong);
+}
+
+.discover-chip-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--c3-dim);
+}
+
+.discover-chip[data-state='ok'] .discover-chip-dot {
+  background: var(--track-accent);
+}
+
+.discover-refresh {
+  min-height: 30px;
+}
+
+/* ---- 区块骨架 ------------------------------------------------------ */
+
+.discover-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.discover-section-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-tight);
+}
+
+.discover-section-title {
+  min-width: 0;
+}
+
+.discover-section-title h2 {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-tight);
+  color: var(--c3-primary);
+  font-size: var(--type-brand);
+  font-weight: var(--weight-heading);
+}
+
+.discover-section-title h2 svg {
+  color: var(--track-accent);
+}
+
+.discover-section-tools {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  flex-wrap: wrap;
+}
+
+.discover-section-meta {
+  color: var(--c3-dim);
+  font-size: var(--type-caption);
+  white-space: nowrap;
+}
+
+.discover-more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 26px;
+  padding: 0 var(--space-tight);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+  transition: color var(--dur-state) var(--ease-list), border-color var(--dur-state) var(--ease-list);
+}
+
+.discover-more:hover {
+  color: var(--c3-primary);
+  border-color: var(--hairline-strong);
+}
+
+.discover-more svg {
+  transition: transform var(--dur-state) var(--ease-out-strong);
+}
+
+.discover-flip {
+  transform: rotate(180deg);
+}
+
+/* ---- 卡片网格：横向铺满，最多 6 列 -------------------------------- */
+
+.discover-card-row {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.discover-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-tight);
+  min-width: 0;
+  padding: var(--space-tight);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background: var(--surface-panel);
+  color: var(--c3-secondary);
+  text-align: left;
+  font: inherit;
+  transition: border-color var(--dur-state) var(--ease-list), background-color var(--dur-state) var(--ease-list), transform var(--dur-gesture) var(--ease-out-strong);
+}
+
+button.discover-card {
+  cursor: pointer;
+}
+
+.discover-card:hover {
+  border-color: var(--hairline-strong);
+  background: var(--hover);
+  transform: translateY(-2px);
+}
+
+.discover-card:active {
+  transform: translateY(0);
+}
+
+.discover-card:focus-visible {
+  outline: 2px solid var(--c3-primary);
+  outline-offset: 2px;
+}
+
+.discover-card-cover {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 100%;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: var(--radius-xs);
+  background: var(--surface-field);
+  color: var(--c3-muted);
+}
+
+.discover-card-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.discover-card-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.discover-card-copy strong,
+.discover-card-copy small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.discover-card-copy strong {
+  color: var(--c3-primary);
+  font-size: var(--type-secondary);
+  font-weight: var(--weight-label);
+}
+
+.discover-card-copy small {
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+}
+
+.discover-card-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  opacity: 0;
+  transition: opacity var(--dur-state) var(--ease-list);
+}
+
+/* 触屏/键盘不该「看不见却点得到」：焦点进入或悬停才显形，同时保留 tab 可达。 */
+.discover-card:hover .discover-card-actions,
+.discover-card:focus-within .discover-card-actions {
+  opacity: 1;
+}
+
+.discover-badge {
+  position: absolute;
+  top: var(--space-tight);
+  right: var(--space-tight);
+  padding: 1px var(--space-1);
+  border-radius: var(--radius-xs);
+  background: var(--selection);
+  color: var(--c3-primary);
+  font-size: var(--type-caption);
+}
+
+.discover-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--c3-muted);
+  transition: color var(--dur-state) var(--ease-list), border-color var(--dur-state) var(--ease-list), background-color var(--dur-state) var(--ease-list);
+}
+
+.discover-icon-button:hover {
+  color: var(--c3-primary);
+  border-color: var(--hairline-strong);
+  background: var(--hover);
+}
+
+.discover-icon-button:disabled {
+  opacity: 0.4;
+}
+
+/* ---- 三种状态：骨架 / 空态 / 错误 ---------------------------------- */
+
+.discover-skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.discover-skeleton {
+  aspect-ratio: 3 / 4;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background: var(--surface-panel);
+  /* 骨架只是「正在取」的视觉占位，不承载信息；呼吸用装饰性循环，reduced-motion 下禁用。 */
+  animation: discover-breath var(--dur-breath) var(--ease-breath) infinite;
+}
+
+@keyframes discover-breath {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 0.85; }
+}
+
+.discover-empty {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-tight);
+  padding: var(--space-2);
+  border: 1px dashed var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+  line-height: var(--leading-body);
+}
+
+.discover-empty svg {
+  flex: none;
+  margin-top: 1px;
+  color: var(--c3-dim);
+}
+
+.discover-error {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  padding: var(--space-tight) var(--space-2);
+  border-left: 2px solid var(--c1-warn);
+  border-radius: var(--radius-xs);
+  background: var(--surface-panel);
+  color: var(--c3-secondary);
+  font-size: var(--type-caption);
+}
+
+.discover-error > span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.discover-error svg {
+  flex: none;
+  color: var(--c1-warn);
+}
+
+.discover-notice {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  padding: var(--space-tight) var(--space-2);
+  border-left: 2px solid var(--c3-muted);
+  background: var(--surface-field);
+  color: var(--c3-secondary);
+  font-size: var(--type-caption);
+}
+
+.discover-notice > span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.discover-notice > svg {
+  flex: none;
+  color: var(--c3-muted);
+}
+
+/* 失败用 C1 告警色，普通反馈保持中性：颜色只表达严重级别（C1 通道的既有约定）。 */
+.discover-notice[data-tone='error'] {
+  border-left-color: var(--c1-warn);
+}
+
+.discover-notice[data-tone='error'] > svg {
+  color: var(--c1-warn);
+}
+
+.discover-note {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+}
+
+/* ---- 歌单分类 chips + 加载更多 ------------------------------------- */
+
+.discover-cats,
+.discover-orders {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+}
+
+.discover-orders {
+  padding-left: var(--space-tight);
+  border-left: 1px solid var(--hairline);
+}
+
+.discover-cat {
+  min-height: 26px;
+  padding: 0 var(--space-tight);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-capsule);
+  background: transparent;
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+  white-space: nowrap;
+  transition: color var(--dur-state) var(--ease-list), border-color var(--dur-state) var(--ease-list), background-color var(--dur-state) var(--ease-list);
+}
+
+.discover-cat:hover {
+  color: var(--c3-primary);
+  border-color: var(--hairline-strong);
+}
+
+.discover-cat[aria-pressed='true'] {
+  color: var(--c3-primary);
+  border-color: var(--hairline-strong);
+  background: var(--selection);
+}
+
+.discover-load-more {
+  display: flex;
+  justify-content: center;
+  padding-top: var(--space-tight);
+}
+
+/* ---- 详情抽屉 ------------------------------------------------------ */
+
+.discover-detail-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  display: flex;
+  justify-content: flex-end;
+  background: color-mix(in oklab, var(--surface-void) 62%, transparent);
+}
+
+.discover-detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: min(520px, 92vw);
+  height: 100%;
+  min-height: 0;
+  padding: var(--space-2) var(--space-2) var(--space-3);
+  border-left: 1px solid var(--hairline-strong);
+  background: var(--surface-app);
+  box-shadow: var(--shadow-ambient-lg);
+  animation: discover-slide var(--dur-gesture) var(--ease-out-strong) both;
+}
+
+@keyframes discover-slide {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: none; }
+}
+
+.discover-detail-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-bottom: var(--space-tight);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.discover-detail-copy {
+  min-width: 0;
+}
+
+.discover-detail-copy h2 {
+  font-size: var(--type-brand);
+  font-weight: var(--weight-heading);
+  line-height: var(--leading-title);
+  overflow-wrap: anywhere;
+}
+
+.discover-detail-copy p {
+  margin-top: var(--space-1);
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+}
+
+.discover-detail-close {
+  flex: none;
+  width: 28px;
+  height: 28px;
+}
+
+.discover-detail-live {
+  margin-top: var(--space-1);
+  color: var(--c3-dim);
+  font-size: var(--type-caption);
+  line-height: var(--leading-body);
+}
+
+.discover-detail-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  flex-wrap: wrap;
+}
+
+.discover-detail-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.discover-row {
+  display: grid;
+  grid-template-columns: 28px 24px minmax(0, 1fr) 48px 26px;
+  align-items: center;
+  gap: var(--space-tight);
+  min-height: 48px;
+  padding: 0 var(--space-tight);
+  border-radius: var(--radius-xs);
+  color: var(--c3-secondary);
+  transition: background-color var(--dur-state) var(--ease-list), color var(--dur-state) var(--ease-list);
+}
+
+.discover-row:hover {
+  background: var(--hover);
+  color: var(--c3-primary);
+}
+
+.discover-row-index {
+  color: var(--c3-dim);
+  font-size: var(--type-caption);
+  text-align: right;
+}
+
+.discover-row-copy {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.discover-row-copy strong,
+.discover-row-copy small {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.discover-row-copy strong {
+  font-size: var(--type-secondary);
+  font-weight: var(--weight-label);
+}
+
+.discover-row-copy small {
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+}
+
+.discover-row-dur {
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+  text-align: right;
+}
+
+/* ---- 响应式：只降列，不改成居中窄栏 -------------------------------- */
+
+@media (max-width: 1500px) {
+  .discover-card-row,
+  .discover-skeleton-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1180px) {
+  .discover-page {
+    padding: var(--space-2) var(--space-3) var(--space-3);
+  }
+
+  .discover-card-row,
+  .discover-skeleton-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .discover-card-row,
+  .discover-skeleton-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .discover-card-row,
+  .discover-skeleton-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .discover-detail {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .discover-skeleton {
+    animation: none;
+    opacity: 0.7;
+  }
+
+  .discover-detail {
+    animation: none;
+  }
+
+  .discover-card:hover {
+    transform: none;
+  }
+}

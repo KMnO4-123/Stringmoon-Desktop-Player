@@ -1,0 +1,652 @@
+/*
+ * audio-console.css —— 音频控制中心。
+ *
+ * 三条约束写在最前面，改这个文件的人先读：
+ *  1. 只准引用 var(--token)：字面颜色 / 裸时长 / 裸字号 / cubic-bezier 会被 check:tokens 拦；
+ *  2. **横向铺满**：标题行、tab 条、每一张控制带都是整行宽度；控制项在带内按列横向铺开，
+ *     不允许「左边一张窄卡、右边一大片空白」（用户明确抱怨过的观感问题）；
+ *  3. reduced-motion 下不位移、不缩放、不做入场动画（只保留最终态）。
+ *
+ * 布局模型（改之前先理解这三层）：
+ *    .audio-console          纵向堆叠：头 → tab 条 → 面板 → 脚注
+ *    .audio-panel > .audio-grid   纵向堆叠「控制带」
+ *    .audio-card             一条控制带：标题横跨整行，其下的每个 .audio-field 在
+ *                            auto-fit 栅格里横向流动，列数随窗口宽度自适应 ——
+ *                            所以同一张卡里的 3~4 个控件会并排铺满，而不是竖着占一条窄缝。
+ */
+
+.audio-console {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  min-width: 0;
+  padding-bottom: var(--space-2);
+  color: var(--c3-secondary);
+  /* 与设置页同源的背景微光：整页有层次，但不去动 surface 基色。 */
+  background:
+    radial-gradient(ellipse 70% 50% at 92% -8%, var(--track-wash), transparent 62%);
+}
+
+/* ── 头：标题左、状态右，整行 ─────────────────────────────────────── */
+.audio-console-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--space-2) var(--space-3);
+  padding-top: var(--space-tight);
+}
+
+.audio-console-title h1 {
+  margin: var(--space-1) 0 var(--space-1);
+  color: var(--c3-primary);
+  font-size: var(--type-heading);
+  font-weight: var(--weight-heading);
+  letter-spacing: var(--tracking-default);
+  line-height: var(--leading-title);
+}
+
+.audio-console-title p {
+  margin: 0;
+  max-width: 74ch;
+  color: var(--c3-muted);
+  font-size: var(--type-secondary);
+  line-height: var(--leading-body);
+}
+
+.audio-console-status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  padding-bottom: 2px;
+}
+
+.audio-engine-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 28px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-capsule);
+  background: var(--surface-field);
+  color: var(--c3-muted);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption);
+}
+
+.audio-engine-chip::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-capsule);
+  background: var(--c3-dim);
+  transition: background-color var(--dur-state) var(--ease-list);
+}
+
+.audio-engine-chip[data-state='up']::before { background: var(--track-accent); }
+.audio-engine-chip[data-state='down']::before { background: var(--c1-warn); }
+
+/* 应用反馈：任何提交都会先 pending 再 applied/rejected（e2e 按 data-state 断言）。 */
+.audio-apply-state,
+.audio-apply-idle {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-capsule);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption);
+  transition: color var(--dur-state) var(--ease-list), background-color var(--dur-state) var(--ease-list);
+}
+
+.audio-apply-idle { color: var(--c3-dim); }
+.audio-apply-state { background: var(--surface-field); }
+.audio-apply-state[data-state='pending'] { color: var(--c1-warn); }
+.audio-apply-state[data-state='applied'] { color: var(--track-accent); }
+.audio-apply-state[data-state='rejected'] { color: var(--c1-warn); }
+
+/* ── Tab 条：整行等分，不再缩成左上角一颗胶囊 ──────────────────── */
+.audio-tabs {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: var(--space-1);
+  width: 100%;
+  padding: var(--space-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background:
+    radial-gradient(120% 200% at 0% 0%, var(--hover), transparent 60%),
+    var(--surface-panel);
+}
+
+.audio-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-tight);
+  min-height: 40px;
+  padding: 0 var(--space-2);
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: none;
+  color: var(--c3-muted);
+  font-family: inherit;
+  font-size: var(--type-number);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur-state) var(--ease-list), color var(--dur-state) var(--ease-list);
+}
+
+.audio-tab svg { flex: none; opacity: 0.75; }
+.audio-tab:hover { background: var(--hover); color: var(--c3-secondary); }
+.audio-tab:hover svg { opacity: 1; }
+.audio-tab[aria-selected='true'] {
+  background: var(--selection);
+  color: var(--c3-primary);
+}
+.audio-tab[aria-selected='true'] svg { opacity: 1; color: var(--track-accent); }
+/* 选中态下沿的一道细光：比整块实心更轻，和播放栏的材质语言一致。 */
+.audio-tab[aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  inset-inline: var(--space-2);
+  bottom: 0;
+  height: 1px;
+  background: var(--track-accent);
+  opacity: 0.5;
+}
+.audio-tab:focus-visible { outline: 2px solid var(--track-accent); outline-offset: 2px; }
+
+/* ── 面板 ──────────────────────────────────────────────────────────── */
+.audio-panel { display: block; }
+.audio-panel[hidden] { display: none; }
+.audio-panel:not([hidden]) { animation: audio-panel-in var(--dur-state) var(--ease-out-strong) both; }
+
+@keyframes audio-panel-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* 面板内的控制带是纵向堆叠的整行条带（不是并排的窄卡）。 */
+.audio-panel > .audio-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+/* ── 控制带：标题满行 + 控件横向流动 ─────────────────────────────── */
+/* 控制带的列数用显式断点，不用 auto-fit：
+ * auto-fit 在 2K/4K 屏上会排出 8~10 列，每个控件被压成一条 200px 的窄缝（正是用户抱怨的观感）；
+ * 断点式 3/4 列能让控件保持可读宽度，同时整条带仍然铺满。 */
+.audio-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* start：每个控件盒子按自身内容高度收口，不用被拉成和最高邻居一样高 ——
+     拉伸会在「左右交换」这种只有一个复选框的控件里留下大片空白（用户抱怨的正是这种观感）。 */
+  align-items: start;
+  gap: var(--space-2) var(--space-3);
+  width: 100%;
+  min-width: 0;
+  padding: var(--space-2) var(--space-inset);
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  /* 材质与设置页同源：面板底 + 一层极淡的顶部高光，避免整页"一片死黑"。
+     高光用 radial-gradient 而非 border，是因为它不影响盒模型与命中区域。 */
+  background:
+    radial-gradient(120% 140% at 0% 0%, var(--hover-strong), transparent 58%),
+    var(--surface-panel);
+  transition: border-color var(--dur-state) var(--ease-list), box-shadow var(--dur-state) var(--ease-list);
+}
+
+/* 左侧一道极细的强调线：四条带一眼能对齐，又不喧宾夺主。 */
+.audio-card::before {
+  content: '';
+  position: absolute;
+  inset-block: 0;
+  inset-inline-start: 0;
+  width: 1px;
+  background: var(--track-accent);
+  opacity: 0.18;
+  transition: opacity var(--dur-state) var(--ease-list);
+}
+
+.audio-card:hover { border-color: var(--hairline-strong); box-shadow: var(--shadow-ambient); }
+.audio-card:hover::before { opacity: 0.42; }
+
+/* 标题横跨整条带；右侧是这条带的一句话解释。 */
+.audio-card-head {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-3);
+  padding-bottom: var(--space-tight);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.audio-card-head h2 {
+  margin: 0;
+  color: var(--c3-primary);
+  font-size: var(--type-brand);
+  font-weight: var(--weight-heading);
+  white-space: nowrap;
+}
+
+.audio-card-head span {
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+  line-height: var(--leading-body);
+  text-align: right;
+}
+
+/* 这些子元素天然要占满整条带（不是某个控件列）。 */
+.audio-card > .audio-field-note,
+.audio-card > .audio-note,
+.audio-card > .audio-error,
+.audio-card > .audio-unsupported,
+.audio-card > .audio-chips,
+.audio-card > .audio-meters,
+.audio-card > .decode-matrix,
+.audio-card > .audio-segmented,
+.audio-card > .audio-inline {
+  grid-column: 1 / -1;
+}
+
+/* ── 一行控件：标签 / 请求值 / 实际值 / 控件 ─────────────────────── */
+.audio-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-tight);
+  min-width: 0;
+  /* 单行控件（只有一个开关）不会被邻格拉高，也不显得空。 */
+  padding: var(--space-tight) var(--space-2);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  background: var(--surface-field);
+  transition: border-color var(--dur-state) var(--ease-list), background-color var(--dur-state) var(--ease-list);
+}
+
+.audio-field:hover { border-color: var(--hairline); }
+
+.audio-field-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-tight);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.audio-field-label {
+  color: var(--c3-primary);
+  font-size: var(--type-secondary);
+  line-height: var(--leading-body);
+}
+
+.audio-field-values {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.audio-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px var(--space-tight);
+  border-radius: var(--radius-capsule);
+  font-family: var(--font-mono);
+  font-size: var(--type-caption);
+  white-space: nowrap;
+}
+
+.audio-value-request { color: var(--c3-dim); background: var(--surface-panel); }
+.audio-value-actual { color: var(--c3-secondary); background: var(--selection); }
+.audio-value-actual[data-mismatch] { color: var(--c1-warn); }
+
+/* 请求值与实际值不一致：不只是变个颜色，整行左侧再加一道提示线。 */
+.audio-field[data-mismatch] { border-color: var(--hairline-strong); }
+
+.audio-field-note {
+  display: block;
+  color: var(--c3-dim);
+  font-size: var(--type-caption);
+  line-height: var(--leading-body);
+}
+
+/* 引擎不支持：统一是「置灰 + 一句中文」，视觉上不能还能点。 */
+.audio-unsupported {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--c1-warn);
+  font-size: var(--type-caption);
+  line-height: var(--leading-body);
+}
+
+.audio-unsupported input,
+.audio-unsupported select,
+.audio-unsupported button { opacity: 0.5; }
+
+.audio-card.audio-unsupported .audio-card-head span { color: var(--c1-warn); }
+
+/* ── 控件 ──────────────────────────────────────────────────────────── */
+.audio-console input[type='range'] {
+  width: 100%;
+  height: 22px;
+  margin: 0;
+  accent-color: var(--slider-accent);
+  cursor: pointer;
+}
+
+.audio-console input[type='range']:disabled { cursor: not-allowed; opacity: 0.5; }
+
+.audio-console select {
+  min-height: 32px;
+  max-width: 100%;
+  padding: 0 var(--space-tight);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-field);
+  color: var(--c3-primary);
+  font-family: inherit;
+  font-size: var(--type-secondary);
+}
+
+.audio-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-tight);
+  min-height: 30px;
+  color: var(--c3-secondary);
+  font-size: var(--type-secondary);
+  cursor: pointer;
+}
+
+.audio-switch input[type='checkbox'] { width: 16px; height: 16px; accent-color: var(--slider-accent); }
+
+/* 分段控件：满宽的等分胶囊，选中项用同一套 selection 材质。 */
+/* 分段控件用等分栅格：7 个采样率在窄列里也能排成整齐的两三行，
+   而不是 flex-wrap 那种「第一行 3 个、第二行 3 个、第三行 1 个」的参差。 */
+.audio-segmented {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(52px, 1fr));
+  align-items: center;
+  gap: var(--space-1);
+  width: 100%;
+  padding: var(--space-1);
+  border-radius: var(--radius-sm);
+  background: var(--surface-field);
+}
+
+.audio-segmented button {
+  min-height: 30px;
+  padding: 0 var(--space-tight);
+  border: 0;
+  border-radius: var(--radius-xs);
+  background: none;
+  color: var(--c3-muted);
+  font-family: inherit;
+  font-size: var(--type-number);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color var(--dur-state) var(--ease-list), color var(--dur-state) var(--ease-list);
+}
+
+.audio-segmented button:hover:not(:disabled) { background: var(--hover); color: var(--c3-secondary); }
+.audio-segmented button[aria-pressed='true'] { background: var(--selection); color: var(--c3-primary); }
+.audio-segmented button:disabled { opacity: 0.45; cursor: not-allowed; }
+.audio-segmented button:focus-visible { outline: 2px solid var(--track-accent); outline-offset: 1px; }
+
+.audio-inline {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.audio-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface-field);
+  color: var(--c3-secondary);
+  font-family: inherit;
+  font-size: var(--type-caption);
+  cursor: pointer;
+  transition: background-color var(--dur-hover) var(--ease-list), border-color var(--dur-state) var(--ease-list), color var(--dur-state) var(--ease-list);
+}
+
+.audio-action:hover:not(:disabled) { background: var(--hover-strong); border-color: var(--track-accent); color: var(--c3-primary); }
+.audio-action:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.audio-pair { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+/* 一个滑杆 + 读数：读数固定宽度，避免拖动时数字跳动把布局带着抖。 */
+.audio-slider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  flex: 1 1 170px;
+  min-width: 0;
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+}
+
+.audio-slider input[type='range'] { flex: 1 1 auto; min-width: 0; }
+.audio-slider output { min-width: 56px; color: var(--c3-secondary); font-family: var(--font-mono); text-align: right; }
+
+/* ── chips / 读数 ──────────────────────────────────────────────────── */
+.audio-chips {
+  display: flex;
+  align-items: center;
+  gap: var(--space-tight);
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.audio-chips .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px var(--space-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-capsule);
+  background: var(--surface-field);
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+  white-space: nowrap;
+}
+
+.audio-chips .chip b { color: var(--c3-secondary); font-family: var(--font-mono); font-weight: var(--weight-normal); }
+
+/* 信号路径那条带：读数比普通 chip 更重，它是这一页唯一"引擎此刻真实在做什么"的证据。 */
+.audio-card[aria-label='信号路径'] .chip { padding: 6px var(--space-2); }
+.audio-card[aria-label='信号路径'] .chip b { color: var(--c3-primary); font-size: var(--type-secondary); }
+
+/* 「输出」这条带里的控件天生更宽（设备下拉 + 采样率 7 档），
+   两列比三列好读：三列会把 7 个采样率挤成三行碎块。 */
+.audio-card[aria-label='输出'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (min-width: 1760px) {
+  .audio-card[aria-label='输出'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .audio-card[aria-label='输出'] { grid-template-columns: minmax(0, 1fr); }
+}
+.audio-chips .chip[data-unsupported] { color: var(--c1-warn); border-color: var(--hairline-strong); }
+
+/* 实时电平：5 个读数横向铺满。 */
+.audio-meters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
+  gap: var(--space-tight);
+  width: 100%;
+}
+
+.audio-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-tight) var(--space-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background: var(--surface-field);
+}
+
+.audio-meter-label { color: var(--c3-muted); font-size: var(--type-caption); }
+.audio-meter-value { color: var(--c3-dim); font-size: var(--type-title); line-height: var(--leading-title); font-variant-numeric: tabular-nums; }
+.audio-meter[data-state='live'] .audio-meter-value { color: var(--c3-primary); }
+.audio-meter-unit { color: var(--c3-dim); font-size: var(--type-caption); }
+
+/* ── 解码矩阵：铺满整条带，按可用宽度排更多列 ───────────────────── */
+.decode-matrix {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+  gap: var(--space-tight);
+  width: 100%;
+}
+
+.decode-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-areas: 'ext label' 'kind availability' 'lossless lossless';
+  gap: 2px var(--space-tight);
+  align-items: baseline;
+  padding: var(--space-tight) var(--space-2);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  background: var(--surface-field);
+}
+
+.decode-ext { grid-area: ext; color: var(--c3-primary); font-size: var(--type-secondary); text-transform: lowercase; }
+.decode-label { grid-area: label; color: var(--c3-muted); font-size: var(--type-caption); line-height: var(--leading-body); }
+.decode-kind { grid-area: kind; color: var(--c3-secondary); font-size: var(--type-caption); }
+.decode-lossless { grid-area: lossless; color: var(--c3-dim); font-size: var(--type-caption); }
+.decode-availability { grid-area: availability; color: var(--c3-dim); font-size: var(--type-caption); text-align: right; }
+
+/* 来源：引擎实测 vs 静态说明。静态的必须一眼能看出来，不能让人当成本机实测。 */
+.decode-item[data-source='static'] { border-style: dashed; }
+.decode-item[data-source='static'] .decode-kind { color: var(--c3-dim); }
+
+/* 本机确实没有这个解码器：置灰 + 说清楚，不画成正常支持。 */
+.decode-item[data-available='false'] { opacity: 0.55; border-style: dashed; }
+.decode-item[data-available='false'] .decode-ext { color: var(--c3-dim); text-decoration: line-through; }
+.decode-item[data-available='false'] .decode-availability { color: var(--c1-warn); }
+
+.decode-item[data-kind='unsupported'] { opacity: 0.6; }
+.decode-item[data-kind='dsd'] { border-color: color-mix(in oklab, var(--track-accent) 40%, var(--hairline)); }
+
+/* ── 均衡面板：与其它带同一套卡片材质，避免「一页两种外观」 ─────── */
+.audio-console .audio-panel[data-audio-panel='eq'] {
+  padding: var(--space-2) var(--space-inset);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-md);
+  background: var(--surface-panel);
+}
+
+/* ── 页面脚注 ──────────────────────────────────────────────────────── */
+.audio-console-foot {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding-top: var(--space-tight);
+  border-top: 1px solid var(--hairline);
+  color: var(--c3-dim);
+  font-size: var(--type-caption);
+  line-height: var(--leading-body);
+}
+
+/* 值不一致时的说明行（与 .audio-value-actual 同一条纪律：不一致要标出来）。 */
+.audio-note {
+  margin: 0;
+  color: var(--c3-muted);
+  font-size: var(--type-caption);
+  line-height: var(--leading-body);
+}
+
+.audio-note[data-static] { color: var(--c1-warn); }
+
+.audio-error {
+  margin: 0;
+  padding: var(--space-tight) var(--space-2);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-sm);
+  background: var(--error-surface);
+  color: var(--error-text);
+  font-size: var(--type-caption);
+  line-height: var(--leading-body);
+}
+
+/* 载入指示器直接复用 player.css 的全局 .spin（te-spin + 每秒一圈的转，
+   那里已有一条 token-allow 说明为什么它是装饰性循环而不是过渡时长）——
+   这里不再写第二份 keyframes，否则两个同名旋转的周期会互相打架。 */
+
+/* reduced-motion：入场/过渡全部关掉，不做位移与缩放（只保留最终状态）。 */
+@media (prefers-reduced-motion: reduce) {
+  .audio-tab,
+  .audio-segmented button,
+  .audio-action,
+  .audio-card,
+  .audio-card::before,
+  .audio-value,
+  .audio-apply-state {
+    transition: none;
+  }
+
+  .audio-panel:not([hidden]) { animation: none; }
+  .audio-console .spin { animation: none; }
+}
+
+/* 宽屏：一排 4 个控件（控制带仍是整行，只是列更多）。 */
+@media (min-width: 1760px) {
+  .audio-card { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+@media (max-width: 1180px) {
+  .audio-card { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* 限幅器四个参数天然是一组（开关 / 天花板 / 释放 / 前瞻），一排放得下更利于对比。 */
+.audio-card[aria-label='限幅器'] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1180px) {
+  .audio-card[aria-label='限幅器'] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 620px) {
+  .audio-card[aria-label='限幅器'] { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* 窄窗：控制带里的控件退回一列，tab 条允许换行（横排塞不下时不许横向溢出）。 */
+@media (max-width: 900px) {
+  .audio-tabs {
+    grid-auto-flow: row;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-columns: auto;
+  }
+
+  .audio-card { padding: var(--space-2); }
+  .audio-card-head { flex-direction: column; align-items: flex-start; gap: var(--space-1); }
+  .audio-card-head span { text-align: left; }
+}
+
+@media (max-width: 620px) {
+  .audio-tabs { grid-template-columns: minmax(0, 1fr); }
+  .audio-card { grid-template-columns: minmax(0, 1fr); }
+  .audio-console-head { grid-template-columns: minmax(0, 1fr); }
+  .audio-console-status { justify-content: flex-start; }
+}

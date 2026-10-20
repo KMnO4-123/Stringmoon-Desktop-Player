@@ -1,0 +1,85 @@
+# Stringmoon / Twilight Echo —— 公开仓库忽略清单
+# 生成于 2026-10-20（发布准备）。原则：只收源码、文档、第三方源码与测试夹具；
+# 构建产物、安装包、本机会话态、QA 痕迹、个人机器路径产物一律不进仓库。
+
+# ---------- 依赖 ----------
+node_modules/
+**/node_modules/
+.pnpm-store/
+
+# ---------- 构建产物 ----------
+app/out/
+app/release/
+engine/build/
+engine/bin/
+out/
+dist/
+*.tsbuildinfo
+*.obj
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.dll
+
+# 第三方源码入库，但第三方目录里的构建产物不入库
+engine/third_party/**/build/
+engine/third_party/**/*.o
+engine/third_party/**/*.obj
+engine/third_party/**/*.a
+engine/third_party/**/*.lib
+engine/third_party/**/*.pdb
+engine/third_party/**/*.dll
+engine/third_party/**/*.exe
+
+# ---------- 打包 / 分发产物（体积大或不含源码）----------
+Stringmoon-Setup-*.exe
+*.blockmap
+latest.yml
+app/resources/runtime/
+app/resources/runtime.zip
+app/resources/icon-archive/
+安装与使用说明-*.txt
+
+# ---------- QA / 冒烟 / 临时工作区（本机产生，含绝对路径与个人数据）----------
+.smoke/
+app/.smoke/
+.scratch/
+_scratch/
+**/.smoke/
+
+# ---------- GraphFlow 本地工具状态 ----------
+.graphflow/
+.graphflow-cache/
+graphflow-out/
+**/.graphflow/
+**/.graphflow-cache/
+
+# ---------- 机密 / 本机会话态（泄漏会直接暴露真实凭证）----------
+app/.auth-state/
+app/mock-log.json
+*.auth-state/
+*.session
+*.vkey
+*.local
+.env
+.env.*
+!.env.example
+*.pem
+*.pfx
+*.p12
+id_rsa*
+
+# ---------- 日志 / 系统垃圾 ----------
+*.log
+Thumbs.db
+desktop.ini
+.DS_Store
+*.tmp
+*.bak
+~$*
+
+# ---------- 注意：以下必须入库，不要加规则 ----------
+# docs/screenshots/          公众版 README 引用的截图
+# engine/third_party/        LGPL 源码可及性 + 离线构建（7.2 MiB）
+# app/pnpm-lock.yaml         可复现安装

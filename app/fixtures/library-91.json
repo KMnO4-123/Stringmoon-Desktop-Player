@@ -1,0 +1,918 @@
+{
+  "note": "AI-B placeholder fixture: synthetic track names + deterministic fake durations (same hash as mock-engine). Replaced by the engine export when it lands.",
+  "generatedAt": "2026-10-14T16:08:10.258Z",
+  "sourceDir": "D:\\Music",
+  "count": 91,
+  "tracks": [
+    {
+      "trackId": "tl_0001",
+      "title": "测试曲目 001",
+      "artist": "Test Artist 01",
+      "album": "Twilight Test Library",
+      "durationMs": 110437,
+      "path": "D:\\Music\\Test Artist 01 - 测试曲目 001.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0002",
+      "title": "测试曲目 002",
+      "artist": "Test Artist 02",
+      "album": "Twilight Test Library",
+      "durationMs": 258576,
+      "path": "D:\\Music\\Test Artist 02 - 测试曲目 002.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0003",
+      "title": "测试曲目 003",
+      "artist": "Test Artist 03",
+      "album": "Twilight Test Library",
+      "durationMs": 409122,
+      "path": "D:\\Music\\Test Artist 03 - 测试曲目 003.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0004",
+      "title": "测试曲目 004",
+      "artist": "Test Artist 04",
+      "album": "Twilight Test Library",
+      "durationMs": 310707,
+      "path": "D:\\Music\\Test Artist 04 - 测试曲目 004.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0005",
+      "title": "测试曲目 005",
+      "artist": "Test Artist 05",
+      "album": "Twilight Test Library",
+      "durationMs": 108273,
+      "path": "D:\\Music\\Test Artist 05 - 测试曲目 005.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0006",
+      "title": "测试曲目 006",
+      "artist": "Test Artist 06",
+      "album": "Twilight Test Library",
+      "durationMs": 388823,
+      "path": "D:\\Music\\Test Artist 06 - 测试曲目 006.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0007",
+      "title": "测试曲目 007",
+      "artist": "Test Artist 07",
+      "album": "Twilight Test Library",
+      "durationMs": 319837,
+      "path": "D:\\Music\\Test Artist 07 - 测试曲目 007.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0008",
+      "title": "测试曲目 008",
+      "artist": "Test Artist 08",
+      "album": "Twilight Test Library",
+      "durationMs": 268159,
+      "path": "D:\\Music\\Test Artist 08 - 测试曲目 008.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0009",
+      "title": "测试曲目 009",
+      "artist": "Test Artist 09",
+      "album": "Twilight Test Library",
+      "durationMs": 385279,
+      "path": "D:\\Music\\Test Artist 09 - 测试曲目 009.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0010",
+      "title": "测试曲目 010",
+      "artist": "Test Artist 10",
+      "album": "Twilight Test Library",
+      "durationMs": 348157,
+      "path": "D:\\Music\\Test Artist 10 - 测试曲目 010.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0011",
+      "title": "测试曲目 011",
+      "artist": "Test Artist 11",
+      "album": "Twilight Test Library",
+      "durationMs": 212548,
+      "path": "D:\\Music\\Test Artist 11 - 测试曲目 011.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0012",
+      "title": "测试曲目 012",
+      "artist": "Test Artist 12",
+      "album": "Twilight Test Library",
+      "durationMs": 153162,
+      "path": "D:\\Music\\Test Artist 12 - 测试曲目 012.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0013",
+      "title": "测试曲目 013",
+      "artist": "Test Artist 01",
+      "album": "Twilight Test Library",
+      "durationMs": 245366,
+      "path": "D:\\Music\\Test Artist 01 - 测试曲目 013.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0014",
+      "title": "测试曲目 014",
+      "artist": "Test Artist 02",
+      "album": "Twilight Test Library",
+      "durationMs": 230316,
+      "path": "D:\\Music\\Test Artist 02 - 测试曲目 014.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0015",
+      "title": "测试曲目 015",
+      "artist": "Test Artist 03",
+      "album": "Twilight Test Library",
+      "durationMs": 143423,
+      "path": "D:\\Music\\Test Artist 03 - 测试曲目 015.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0016",
+      "title": "测试曲目 016",
+      "artist": "Test Artist 04",
+      "album": "Twilight Test Library",
+      "durationMs": 188098,
+      "path": "D:\\Music\\Test Artist 04 - 测试曲目 016.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0017",
+      "title": "测试曲目 017",
+      "artist": "Test Artist 05",
+      "album": "Twilight Test Library",
+      "durationMs": 221638,
+      "path": "D:\\Music\\Test Artist 05 - 测试曲目 017.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0018",
+      "title": "测试曲目 018",
+      "artist": "Test Artist 06",
+      "album": "Twilight Test Library",
+      "durationMs": 272289,
+      "path": "D:\\Music\\Test Artist 06 - 测试曲目 018.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0019",
+      "title": "测试曲目 019",
+      "artist": "Test Artist 07",
+      "album": "Twilight Test Library",
+      "durationMs": 198104,
+      "path": "D:\\Music\\Test Artist 07 - 测试曲目 019.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0020",
+      "title": "测试曲目 020",
+      "artist": "Test Artist 08",
+      "album": "Twilight Test Library",
+      "durationMs": 381635,
+      "path": "D:\\Music\\Test Artist 08 - 测试曲目 020.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0021",
+      "title": "测试曲目 021",
+      "artist": "Test Artist 09",
+      "album": "Twilight Test Library",
+      "durationMs": 261114,
+      "path": "D:\\Music\\Test Artist 09 - 测试曲目 021.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0022",
+      "title": "测试曲目 022",
+      "artist": "Test Artist 10",
+      "album": "Twilight Test Library",
+      "durationMs": 294433,
+      "path": "D:\\Music\\Test Artist 10 - 测试曲目 022.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0023",
+      "title": "测试曲目 023",
+      "artist": "Test Artist 11",
+      "album": "Twilight Test Library",
+      "durationMs": 303035,
+      "path": "D:\\Music\\Test Artist 11 - 测试曲目 023.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0024",
+      "title": "测试曲目 024",
+      "artist": "Test Artist 12",
+      "album": "Twilight Test Library",
+      "durationMs": 198112,
+      "path": "D:\\Music\\Test Artist 12 - 测试曲目 024.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0025",
+      "title": "测试曲目 025",
+      "artist": "Test Artist 01",
+      "album": "Twilight Test Library",
+      "durationMs": 243757,
+      "path": "D:\\Music\\Test Artist 01 - 测试曲目 025.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0026",
+      "title": "测试曲目 026",
+      "artist": "Test Artist 02",
+      "album": "Twilight Test Library",
+      "durationMs": 359337,
+      "path": "D:\\Music\\Test Artist 02 - 测试曲目 026.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0027",
+      "title": "测试曲目 027",
+      "artist": "Test Artist 03",
+      "album": "Twilight Test Library",
+      "durationMs": 409194,
+      "path": "D:\\Music\\Test Artist 03 - 测试曲目 027.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0028",
+      "title": "测试曲目 028",
+      "artist": "Test Artist 04",
+      "album": "Twilight Test Library",
+      "durationMs": 132908,
+      "path": "D:\\Music\\Test Artist 04 - 测试曲目 028.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0029",
+      "title": "测试曲目 029",
+      "artist": "Test Artist 05",
+      "album": "Twilight Test Library",
+      "durationMs": 150974,
+      "path": "D:\\Music\\Test Artist 05 - 测试曲目 029.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0030",
+      "title": "测试曲目 030",
+      "artist": "Test Artist 06",
+      "album": "Twilight Test Library",
+      "durationMs": 139419,
+      "path": "D:\\Music\\Test Artist 06 - 测试曲目 030.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0031",
+      "title": "测试曲目 031",
+      "artist": "Test Artist 07",
+      "album": "Twilight Test Library",
+      "durationMs": 414301,
+      "path": "D:\\Music\\Test Artist 07 - 测试曲目 031.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0032",
+      "title": "测试曲目 032",
+      "artist": "Test Artist 08",
+      "album": "Twilight Test Library",
+      "durationMs": 321163,
+      "path": "D:\\Music\\Test Artist 08 - 测试曲目 032.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0033",
+      "title": "测试曲目 033",
+      "artist": "Test Artist 09",
+      "album": "Twilight Test Library",
+      "durationMs": 331437,
+      "path": "D:\\Music\\Test Artist 09 - 测试曲目 033.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0034",
+      "title": "测试曲目 034",
+      "artist": "Test Artist 10",
+      "album": "Twilight Test Library",
+      "durationMs": 356738,
+      "path": "D:\\Music\\Test Artist 10 - 测试曲目 034.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0035",
+      "title": "测试曲目 035",
+      "artist": "Test Artist 11",
+      "album": "Twilight Test Library",
+      "durationMs": 371102,
+      "path": "D:\\Music\\Test Artist 11 - 测试曲目 035.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0036",
+      "title": "测试曲目 036",
+      "artist": "Test Artist 12",
+      "album": "Twilight Test Library",
+      "durationMs": 397912,
+      "path": "D:\\Music\\Test Artist 12 - 测试曲目 036.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0037",
+      "title": "测试曲目 037",
+      "artist": "Test Artist 01",
+      "album": "Twilight Test Library",
+      "durationMs": 332434,
+      "path": "D:\\Music\\Test Artist 01 - 测试曲目 037.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0038",
+      "title": "测试曲目 038",
+      "artist": "Test Artist 02",
+      "album": "Twilight Test Library",
+      "durationMs": 377858,
+      "path": "D:\\Music\\Test Artist 02 - 测试曲目 038.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0039",
+      "title": "测试曲目 039",
+      "artist": "Test Artist 03",
+      "album": "Twilight Test Library",
+      "durationMs": 234790,
+      "path": "D:\\Music\\Test Artist 03 - 测试曲目 039.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0040",
+      "title": "测试曲目 040",
+      "artist": "Test Artist 04",
+      "album": "Twilight Test Library",
+      "durationMs": 342661,
+      "path": "D:\\Music\\Test Artist 04 - 测试曲目 040.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0041",
+      "title": "测试曲目 041",
+      "artist": "Test Artist 05",
+      "album": "Twilight Test Library",
+      "durationMs": 145862,
+      "path": "D:\\Music\\Test Artist 05 - 测试曲目 041.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0042",
+      "title": "测试曲目 042",
+      "artist": "Test Artist 06",
+      "album": "Twilight Test Library",
+      "durationMs": 103890,
+      "path": "D:\\Music\\Test Artist 06 - 测试曲目 042.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0043",
+      "title": "测试曲目 043",
+      "artist": "Test Artist 07",
+      "album": "Twilight Test Library",
+      "durationMs": 238611,
+      "path": "D:\\Music\\Test Artist 07 - 测试曲目 043.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0044",
+      "title": "测试曲目 044",
+      "artist": "Test Artist 08",
+      "album": "Twilight Test Library",
+      "durationMs": 283583,
+      "path": "D:\\Music\\Test Artist 08 - 测试曲目 044.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0045",
+      "title": "测试曲目 045",
+      "artist": "Test Artist 09",
+      "album": "Twilight Test Library",
+      "durationMs": 410766,
+      "path": "D:\\Music\\Test Artist 09 - 测试曲目 045.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0046",
+      "title": "测试曲目 046",
+      "artist": "Test Artist 10",
+      "album": "Twilight Test Library",
+      "durationMs": 105267,
+      "path": "D:\\Music\\Test Artist 10 - 测试曲目 046.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0047",
+      "title": "测试曲目 047",
+      "artist": "Test Artist 11",
+      "album": "Twilight Test Library",
+      "durationMs": 217414,
+      "path": "D:\\Music\\Test Artist 11 - 测试曲目 047.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0048",
+      "title": "测试曲目 048",
+      "artist": "Test Artist 12",
+      "album": "Twilight Test Library",
+      "durationMs": 118904,
+      "path": "D:\\Music\\Test Artist 12 - 测试曲目 048.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0049",
+      "title": "测试曲目 049",
+      "artist": "Test Artist 01",
+      "album": "Twilight Test Library",
+      "durationMs": 167461,
+      "path": "D:\\Music\\Test Artist 01 - 测试曲目 049.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0050",
+      "title": "测试曲目 050",
+      "artist": "Test Artist 02",
+      "album": "Twilight Test Library",
+      "durationMs": 111257,
+      "path": "D:\\Music\\Test Artist 02 - 测试曲目 050.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0051",
+      "title": "测试曲目 051",
+      "artist": "Test Artist 03",
+      "album": "Twilight Test Library",
+      "durationMs": 201864,
+      "path": "D:\\Music\\Test Artist 03 - 测试曲目 051.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0052",
+      "title": "测试曲目 052",
+      "artist": "Test Artist 04",
+      "album": "Twilight Test Library",
+      "durationMs": 250611,
+      "path": "D:\\Music\\Test Artist 04 - 测试曲目 052.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0053",
+      "title": "测试曲目 053",
+      "artist": "Test Artist 05",
+      "album": "Twilight Test Library",
+      "durationMs": 284616,
+      "path": "D:\\Music\\Test Artist 05 - 测试曲目 053.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0054",
+      "title": "测试曲目 054",
+      "artist": "Test Artist 06",
+      "album": "Twilight Test Library",
+      "durationMs": 167459,
+      "path": "D:\\Music\\Test Artist 06 - 测试曲目 054.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0055",
+      "title": "测试曲目 055",
+      "artist": "Test Artist 07",
+      "album": "Twilight Test Library",
+      "durationMs": 170562,
+      "path": "D:\\Music\\Test Artist 07 - 测试曲目 055.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0056",
+      "title": "测试曲目 056",
+      "artist": "Test Artist 08",
+      "album": "Twilight Test Library",
+      "durationMs": 176357,
+      "path": "D:\\Music\\Test Artist 08 - 测试曲目 056.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0057",
+      "title": "测试曲目 057",
+      "artist": "Test Artist 09",
+      "album": "Twilight Test Library",
+      "durationMs": 319748,
+      "path": "D:\\Music\\Test Artist 09 - 测试曲目 057.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0058",
+      "title": "测试曲目 058",
+      "artist": "Test Artist 10",
+      "album": "Twilight Test Library",
+      "durationMs": 121887,
+      "path": "D:\\Music\\Test Artist 10 - 测试曲目 058.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0059",
+      "title": "测试曲目 059",
+      "artist": "Test Artist 11",
+      "album": "Twilight Test Library",
+      "durationMs": 212470,
+      "path": "D:\\Music\\Test Artist 11 - 测试曲目 059.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0060",
+      "title": "测试曲目 060",
+      "artist": "Test Artist 12",
+      "album": "Twilight Test Library",
+      "durationMs": 101137,
+      "path": "D:\\Music\\Test Artist 12 - 测试曲目 060.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0061",
+      "title": "测试曲目 061",
+      "artist": "Test Artist 01",
+      "album": "Twilight Test Library",
+      "durationMs": 255837,
+      "path": "D:\\Music\\Test Artist 01 - 测试曲目 061.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0062",
+      "title": "测试曲目 062",
+      "artist": "Test Artist 02",
+      "album": "Twilight Test Library",
+      "durationMs": 274193,
+      "path": "D:\\Music\\Test Artist 02 - 测试曲目 062.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0063",
+      "title": "测试曲目 063",
+      "artist": "Test Artist 03",
+      "album": "Twilight Test Library",
+      "durationMs": 374050,
+      "path": "D:\\Music\\Test Artist 03 - 测试曲目 063.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0064",
+      "title": "测试曲目 064",
+      "artist": "Test Artist 04",
+      "album": "Twilight Test Library",
+      "durationMs": 103966,
+      "path": "D:\\Music\\Test Artist 04 - 测试曲目 064.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0065",
+      "title": "测试曲目 065",
+      "artist": "Test Artist 05",
+      "album": "Twilight Test Library",
+      "durationMs": 127001,
+      "path": "D:\\Music\\Test Artist 05 - 测试曲目 065.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0066",
+      "title": "测试曲目 066",
+      "artist": "Test Artist 06",
+      "album": "Twilight Test Library",
+      "durationMs": 406989,
+      "path": "D:\\Music\\Test Artist 06 - 测试曲目 066.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0067",
+      "title": "测试曲目 067",
+      "artist": "Test Artist 07",
+      "album": "Twilight Test Library",
+      "durationMs": 303528,
+      "path": "D:\\Music\\Test Artist 07 - 测试曲目 067.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0068",
+      "title": "测试曲目 068",
+      "artist": "Test Artist 08",
+      "album": "Twilight Test Library",
+      "durationMs": 231835,
+      "path": "D:\\Music\\Test Artist 08 - 测试曲目 068.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0069",
+      "title": "测试曲目 069",
+      "artist": "Test Artist 09",
+      "album": "Twilight Test Library",
+      "durationMs": 185344,
+      "path": "D:\\Music\\Test Artist 09 - 测试曲目 069.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0070",
+      "title": "测试曲目 070",
+      "artist": "Test Artist 10",
+      "album": "Twilight Test Library",
+      "durationMs": 113097,
+      "path": "D:\\Music\\Test Artist 10 - 测试曲目 070.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0071",
+      "title": "测试曲目 071",
+      "artist": "Test Artist 11",
+      "album": "Twilight Test Library",
+      "durationMs": 214116,
+      "path": "D:\\Music\\Test Artist 11 - 测试曲目 071.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0072",
+      "title": "测试曲目 072",
+      "artist": "Test Artist 12",
+      "album": "Twilight Test Library",
+      "durationMs": 375404,
+      "path": "D:\\Music\\Test Artist 12 - 测试曲目 072.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0073",
+      "title": "测试曲目 073",
+      "artist": "Test Artist 01",
+      "album": "Twilight Test Library",
+      "durationMs": 315043,
+      "path": "D:\\Music\\Test Artist 01 - 测试曲目 073.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0074",
+      "title": "测试曲目 074",
+      "artist": "Test Artist 02",
+      "album": "Twilight Test Library",
+      "durationMs": 374983,
+      "path": "D:\\Music\\Test Artist 02 - 测试曲目 074.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0075",
+      "title": "测试曲目 075",
+      "artist": "Test Artist 03",
+      "album": "Twilight Test Library",
+      "durationMs": 262404,
+      "path": "D:\\Music\\Test Artist 03 - 测试曲目 075.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0076",
+      "title": "测试曲目 076",
+      "artist": "Test Artist 04",
+      "album": "Twilight Test Library",
+      "durationMs": 389001,
+      "path": "D:\\Music\\Test Artist 04 - 测试曲目 076.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0077",
+      "title": "测试曲目 077",
+      "artist": "Test Artist 05",
+      "album": "Twilight Test Library",
+      "durationMs": 407719,
+      "path": "D:\\Music\\Test Artist 05 - 测试曲目 077.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0078",
+      "title": "测试曲目 078",
+      "artist": "Test Artist 06",
+      "album": "Twilight Test Library",
+      "durationMs": 274096,
+      "path": "D:\\Music\\Test Artist 06 - 测试曲目 078.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0079",
+      "title": "测试曲目 079",
+      "artist": "Test Artist 07",
+      "album": "Twilight Test Library",
+      "durationMs": 140935,
+      "path": "D:\\Music\\Test Artist 07 - 测试曲目 079.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0080",
+      "title": "测试曲目 080",
+      "artist": "Test Artist 08",
+      "album": "Twilight Test Library",
+      "durationMs": 305612,
+      "path": "D:\\Music\\Test Artist 08 - 测试曲目 080.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0081",
+      "title": "测试曲目 081",
+      "artist": "Test Artist 09",
+      "album": "Twilight Test Library",
+      "durationMs": 254982,
+      "path": "D:\\Music\\Test Artist 09 - 测试曲目 081.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0082",
+      "title": "测试曲目 082",
+      "artist": "Test Artist 10",
+      "album": "Twilight Test Library",
+      "durationMs": 399304,
+      "path": "D:\\Music\\Test Artist 10 - 测试曲目 082.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0083",
+      "title": "测试曲目 083",
+      "artist": "Test Artist 11",
+      "album": "Twilight Test Library",
+      "durationMs": 326761,
+      "path": "D:\\Music\\Test Artist 11 - 测试曲目 083.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0084",
+      "title": "测试曲目 084",
+      "artist": "Test Artist 12",
+      "album": "Twilight Test Library",
+      "durationMs": 296878,
+      "path": "D:\\Music\\Test Artist 12 - 测试曲目 084.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0085",
+      "title": "测试曲目 085",
+      "artist": "Test Artist 01",
+      "album": "Twilight Test Library",
+      "durationMs": 244283,
+      "path": "D:\\Music\\Test Artist 01 - 测试曲目 085.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0086",
+      "title": "测试曲目 086",
+      "artist": "Test Artist 02",
+      "album": "Twilight Test Library",
+      "durationMs": 340392,
+      "path": "D:\\Music\\Test Artist 02 - 测试曲目 086.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0087",
+      "title": "测试曲目 087",
+      "artist": "Test Artist 03",
+      "album": "Twilight Test Library",
+      "durationMs": 406408,
+      "path": "D:\\Music\\Test Artist 03 - 测试曲目 087.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0088",
+      "title": "测试曲目 088",
+      "artist": "Test Artist 04",
+      "album": "Twilight Test Library",
+      "durationMs": 304525,
+      "path": "D:\\Music\\Test Artist 04 - 测试曲目 088.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0089",
+      "title": "测试曲目 089",
+      "artist": "Test Artist 05",
+      "album": "Twilight Test Library",
+      "durationMs": 246147,
+      "path": "D:\\Music\\Test Artist 05 - 测试曲目 089.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0090",
+      "title": "测试曲目 090",
+      "artist": "Test Artist 06",
+      "album": "Twilight Test Library",
+      "durationMs": 274832,
+      "path": "D:\\Music\\Test Artist 06 - 测试曲目 090.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    },
+    {
+      "trackId": "tl_0091",
+      "title": "测试曲目 091",
+      "artist": "Test Artist 07",
+      "album": "Twilight Test Library",
+      "durationMs": 265298,
+      "path": "D:\\Music\\Test Artist 07 - 测试曲目 091.flac",
+      "sampleRate": 96000,
+      "bitDepth": 24
+    }
+  ]
+}

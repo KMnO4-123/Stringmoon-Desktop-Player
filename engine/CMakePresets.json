@@ -1,0 +1,31 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": { "major": 3, "minor": 25, "patch": 0 },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/ninja",
+      "cacheVariables": { "CMAKE_BUILD_TYPE": "Release" }
+    },
+    {
+      "name": "ninja-release",
+      "displayName": "Ninja Release (default)",
+      "description": "Single-config build; open a developer shell first (tools/build.ps1 does it for you).",
+      "inherits": "base"
+    },
+    {
+      "name": "vs2022",
+      "displayName": "Visual Studio 2022 generator",
+      "description": "Fallback when Ninja is unavailable. CMake locates MSVC by itself.",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build/vs2022"
+    }
+  ],
+  "buildPresets": [
+    { "name": "ninja-release", "configurePreset": "ninja-release", "configuration": "Release" },
+    { "name": "vs2022-release", "configurePreset": "vs2022", "configuration": "Release" }
+  ]
+}

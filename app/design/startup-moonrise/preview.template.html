@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<title>Stringmoon · 月升 / 启动动效预览</title>
+<style>
+  *{box-sizing:border-box}body{margin:0;background:#f1f0ec;color:#28242c;font:14px 'Segoe UI','Microsoft YaHei',sans-serif;-webkit-font-smoothing:antialiased}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #8055ad;outline-offset:5px}button{border:0}main{max-width:1360px;margin:auto;padding:48px 50px 36px}.eyebrow{display:flex;justify-content:space-between;font:10px Consolas,monospace;letter-spacing:2px;color:#737078}.heading{display:flex;align-items:end;justify-content:space-between;margin:28px 0 26px;gap:24px}.heading h1{font:normal 38px Georgia,'SimSun',serif;margin:0;letter-spacing:1px}.heading h1 i{font:italic 21px Georgia,serif;color:#8d8298;margin-left:17px}.heading p{color:#777079;line-height:1.9;font-size:12px;margin:0;text-align:right}.stage-wrap{position:relative;border:1px solid #d4cfd5;border-radius:12px;overflow:hidden;background:#070609;box-shadow:0 22px 70px #28203012}.stage{position:relative;aspect-ratio:16/10;overflow:hidden;isolation:isolate;background:#070609}.scene{position:absolute;width:1280px;height:800px;left:0;top:0;transform-origin:0 0;overflow:hidden;background:#070609}.app-screen{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;opacity:0;will-change:transform,opacity;user-select:none}.atmosphere{position:absolute;inset:0;opacity:0;background:radial-gradient(ellipse 420px 270px at 50% 40%,#8c3b8c12,transparent 90%),radial-gradient(ellipse 500px 220px at 50% 98%,#5045890a,transparent);pointer-events:none}.seed{position:absolute;left:50%;top:40%;width:4px;height:4px;margin:-2px;border-radius:50%;background:#fff4dc;opacity:0;box-shadow:0 0 12px #ffdfa6a0}.plucked-string{position:absolute;left:390px;top:320px;width:500px;height:1px;background:linear-gradient(90deg,transparent,#a68abd65,#fff0d7,#a68abd65,transparent);opacity:0;transform-origin:center}.wave{position:absolute;left:390px;top:307px;width:500px;height:28px;opacity:0}.wave path{fill:none;stroke:#dfc7ee;stroke-width:.6}.orbital-space{position:absolute;left:350px;top:145px;width:580px;height:350px;opacity:0;transform:rotate(-19deg)}.orbital-space ellipse{stroke:#ba9fcb3c;stroke-width:.6;fill:none}.orbit-trace{stroke:url(#orbit-grad)!important;stroke-width:1!important;stroke-dasharray:240 1260;stroke-dashoffset:200}.halo{position:absolute;left:450px;top:130px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,#ad5f9f12,transparent 68%);opacity:0}.star{position:absolute;width:2px;height:2px;background:#d6c9e4;border-radius:50%;opacity:0}.hero{position:absolute;left:480px;top:160px;width:320px;height:320px;transform-origin:center;will-change:transform,opacity}.moon{position:absolute;left:20px;top:5px;width:280px;height:280px}.moon-group{transform-origin:512px 450px}.moon-reveal{transform-box:fill-box;transform-origin:center}.girl{position:absolute;left:20px;top:5px;width:280px;height:280px;opacity:0}.girl-art{transform-origin:50% 65%}.vinyl{position:absolute;left:16px;top:1px;width:288px;height:288px;border-radius:50%;background:repeating-radial-gradient(circle,#111013 0,#111013 2px,#262229 2.3px,#111013 2.8px,#111013 4px);border:1px solid #8c768b39;opacity:0;box-shadow:inset 0 0 35px #000}.vinyl:before{content:'';position:absolute;inset:37%;border-radius:50%;background:#d4c9d7;box-shadow:0 0 0 1px #e9dfeb20}.vinyl:after{content:'';position:absolute;left:calc(50% - 3px);top:calc(50% - 3px);width:6px;height:6px;border-radius:50%;background:#17121d}.ring{position:absolute;left:-4px;top:-19px;width:328px;height:328px;opacity:0;transform:rotate(-90deg)}.ring circle{fill:none;stroke:#b69dc557;stroke-width:.65;stroke-dasharray:1006;stroke-dashoffset:1006}.ring .lit{stroke:#f6d4b9;stroke-width:1.1;stroke-dasharray:64 942}.brand{position:absolute;left:0;right:0;top:503px;text-align:center;pointer-events:none}.word{font:normal 76px Georgia,'Times New Roman',serif;line-height:1.06;letter-spacing:-3.5px;color:#f4edf1;display:flex;justify-content:center;gap:0}.word span{display:block;opacity:0;will-change:transform,opacity}.brand .sub{margin:24px 0 0;font:12px 'Microsoft YaHei',sans-serif;letter-spacing:9px;text-indent:9px;color:#a997ac;opacity:0}.bottom-signature{position:absolute;bottom:43px;left:0;right:0;display:flex;justify-content:center;align-items:center;gap:15px;font:8px Consolas,monospace;letter-spacing:3px;color:#615666;opacity:0}.bottom-signature:before,.bottom-signature:after{content:'';width:25px;height:1px;background:#62536566}.skip{position:absolute;right:25px;top:22px;background:transparent;color:#7b6e83;font-size:10px;padding:10px 12px;letter-spacing:2px;z-index:5;border-radius:6px}.skip:hover{background:#ffffff08;color:#d6cada}.preview-bottom{display:flex;align-items:center;gap:20px;margin-top:20px;min-height:42px}.round{width:38px;height:38px;border:1px solid #cfc8d2;border-radius:50%;background:transparent;display:grid;place-items:center;color:#504656}.round:hover{background:#e8e3ec}.round svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.4}.round .filled{fill:currentColor;stroke:none}.time{font:11px Consolas,monospace;white-space:nowrap;color:#716779;min-width:105px}.timeline{flex:1;appearance:none;height:2px;background:linear-gradient(to right,#735383 var(--progress,0%),#d5cdd7 var(--progress,0%));cursor:pointer;min-width:50px}.timeline::-webkit-slider-thumb{appearance:none;width:9px;height:9px;border-radius:50%;background:#735383}.mode{border:1px solid #d2ccd5;background:transparent;border-radius:20px;padding:9px 14px;color:#736879;font-size:11px;white-space:nowrap}.mode[aria-pressed=true]{background:#e3daeb;border-color:#b1a1bc;color:#5c3876}.chapters{display:grid;grid-template-columns:repeat(4,1fr);margin-top:29px;border-top:1px solid #d9d3da}.chapter{background:transparent;text-align:left;padding:19px 12px 18px 0;color:#85778b;border-bottom:1px solid transparent}.chapter small{font:10px Consolas,monospace;letter-spacing:1px;color:#8c8492}.chapter strong{display:block;font-size:13px;font-weight:500;margin-top:9px}.chapter.active{border-bottom-color:#735383;color:#4c2e62}.chapter:hover{color:#4c2e62}.note{font-size:10px;color:#8c858f;display:flex;justify-content:space-between;gap:20px;margin-top:23px;line-height:1.8}.film main{padding:0;max-width:none}.film .eyebrow,.film .heading,.film .preview-bottom,.film .chapters,.film .note,.film .skip{display:none}.film .stage-wrap{border:0;border-radius:0;box-shadow:none}.film body{background:#070609}.film .stage{width:100vw;height:100vh;aspect-ratio:auto}@media(max-width:760px){main{padding:24px 18px}.heading{margin-top:20px}.heading h1{font-size:28px}.heading h1 i{font-size:16px}.heading p{display:none}.preview-bottom{gap:12px}.time{min-width:auto}.mode{padding:9px;font-size:10px}.note{display:block}.eyebrow{font-size:8px;letter-spacing:1px}.chapter strong{font-size:11px}}@media(prefers-reduced-motion:reduce){.round:hover,.mode{transition:none}}
+</style>
+<style>.moon,.girl{top:37px}.ring{top:-4px}</style>
+</head>
+<body>
+<main>
+  <header class="eyebrow"><span>STRINGMOON &nbsp; / &nbsp; MOTION STUDY 01</span><span>OCTOBER 2026</span></header>
+  <div class="heading"><h1>月升 <i>Moonrise</i></h1><p>一根弦，一轮月，一个只属于音乐的空间。<br>启动动画成品预览 · 03.60 s</p></div>
+  <div class="stage-wrap">
+    <section class="stage" aria-label="Stringmoon 启动动画预览">
+      <div class="scene" aria-hidden="true">
+        <img class="app-screen" src="data:image/png;base64,APP_SCREENSHOT_BASE64" alt="">
+        <div class="atmosphere"></div>
+        <div class="halo"></div><div class="seed"></div><div class="plucked-string"></div>
+        <svg class="wave" viewBox="0 0 500 28"><path d="M0 14 C110 14 166 14 203 14 S236 -2 250 14 S266 30 297 14 S390 14 500 14"/></svg>
+        <svg class="orbital-space" viewBox="0 0 580 350"><defs><linearGradient id="orbit-grad"><stop stop-color="#edb5d0"/><stop offset="1" stop-color="#aa7dd1" stop-opacity="0"/></linearGradient></defs><ellipse cx="290" cy="175" rx="285" ry="82"/><ellipse class="orbit-trace" cx="290" cy="175" rx="285" ry="82"/></svg>
+        <div class="hero">
+          <div class="vinyl"></div>
+          <svg class="ring" viewBox="0 0 328 328"><circle class="ring-track" cx="164" cy="164" r="160"/><circle class="lit" cx="164" cy="164" r="160"/></svg>
+          <svg class="moon" viewBox="0 0 1024 1024"><defs><linearGradient id="moon-grad" gradientUnits="userSpaceOnUse" x1="0" y1="30" x2="0" y2="870"><stop stop-color="#ffeb91"/><stop offset=".23" stop-color="#ffa968"/><stop offset=".48" stop-color="#f665a6"/><stop offset=".72" stop-color="#c642bf"/><stop offset="1" stop-color="#6d44da"/></linearGradient><clipPath id="disc"><circle cx="512" cy="450" r="420"/></clipPath></defs><g class="moon-group" clip-path="url(#disc)" fill="url(#moon-grad)"><g class="moon-reveal"><rect class="moon-band" x="0" y="0" width="1024" height="334"/><rect class="moon-band" x="0" y="343" width="1024" height="60"/><rect class="moon-band" x="0" y="420" width="1024" height="60"/><rect class="moon-band" x="0" y="505" width="1024" height="56"/><rect class="moon-band" x="0" y="593" width="1024" height="55"/><rect class="moon-band" x="0" y="687" width="1024" height="55"/><rect class="moon-band" x="0" y="784" width="1024" height="60"/><rect class="moon-band" x="0" y="890" width="1024" height="90"/></g></g></svg>
+          <svg class="girl" viewBox="0 0 1024 1024"><g class="girl-art">
+            <path fill="#070609" d="M154 826C101 796 139 689 194 625C166 600 154 570 164 528C174 480 228 444 282 397L394 265C451 183 536 137 624 139C746 133 817 189 831 280L834 408C836 464 804 492 790 525C802 562 791 599 766 625L747 653C771 706 812 755 839 828L901 1024H134C104 926 127 861 154 826Z"/>
+            <path fill="#a180ca" d="M342 375C314 451 249 525 204 563C184 527 210 482 247 454ZM326 551C263 626 223 675 217 724C195 671 230 604 326 551ZM191 668C155 748 170 791 218 829C119 816 132 747 191 668ZM765 529C787 571 776 614 728 642C756 612 758 569 765 529Z"/>
+            <path fill="#fcfafc" d="M693 286C670 343 651 363 632 365L663 328C643 364 619 382 597 383L571 411C560 445 567 476 574 481C548 455 545 431 546 393L517 410C504 404 499 399 488 407C492 423 507 438 515 441C506 480 498 548 470 591C512 611 546 636 572 665L632 664C630 630 623 616 610 607L592 601C588 578 590 555 600 534C602 526 609 530 616 533L649 550Q663 556 673 545L702 510Q720 484 730 460Q740 453 733 448L727 433Q722 418 728 404C750 369 758 338 754 316C749 344 742 363 736 384L716 381L688 369L696 343L681 373L665 372C678 347 686 320 693 286Z"/>
+            <path fill="#fcfafc" d="M516 350C485 331 458 355 470 401C486 386 499 370 516 350ZM351 630C387 612 421 582 445 594C513 615 573 673 616 738C525 700 428 638 351 630ZM615 606C644 635 650 676 650 739C683 713 715 696 717 646C680 639 646 623 615 606Z"/>
+            <path fill="none" stroke="#fcfafc" stroke-width="15" d="M267 773C280 704 288 673 321 655C374 624 486 690 625 764C694 734 736 710 737 659"/>
+            <path fill="#a180ca" d="M474 716C530 741 566 754 626 774L625 785C569 792 516 774 474 716ZM718 723C706 757 684 773 651 777L648 765ZM627 778Q647 767 664 782C659 825 692 842 724 880L763 928C698 908 672 877 657 845C661 890 634 929 596 948C578 899 581 858 602 829L626 801Z"/>
+          </g></svg>
+        </div>
+        <div class="brand"><div class="word" aria-label="Stringmoon">Stringmoon</div><p class="sub">月 下 聆 听</p></div>
+        <div class="bottom-signature">A SPACE BETWEEN NOTES</div>
+      </div>
+      <button class="skip" type="button" aria-label="跳过启动动画">跳过 ↗</button>
+    </section>
+  </div>
+  <div class="preview-bottom">
+    <button class="round play" aria-label="播放或暂停预览"></button>
+    <button class="round replay" aria-label="重新播放"><svg viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></svg></button>
+    <span class="time">0.00 / 3.60 s</span>
+    <input class="timeline" type="range" min="0" max="3600" value="0" step="1" aria-label="预览进度">
+    <button class="mode" aria-pressed="false">减少动态</button>
+  </div>
+  <nav class="chapters" aria-label="动画关键帧"><button class="chapter" data-time="280"><small>01 / 0.28 S</small><strong>拨弦 · 光的起点</strong></button><button class="chapter" data-time="1150"><small>02 / 1.15 S</small><strong>月升 · 剪影显现</strong></button><button class="chapter" data-time="2050"><small>03 / 2.05 S</small><strong>停驻 · 品牌定格</strong></button><button class="chapter" data-time="3120"><small>04 / 3.12 S</small><strong>入境 · 接入音乐空间</strong></button></nav>
+  <footer class="note"><span>设计预览 · 使用现有音乐空间截图演示最终衔接 · 尚待选定</span><span>空格 播放 / 暂停 &nbsp; · &nbsp; R 重播 &nbsp; · &nbsp; Esc 跳过</span></footer>
+</main>
+<script>
+(() => {
+  const duration = 3600, easeOut = 'cubic-bezier(.16,1,.3,1)', flow = 'cubic-bezier(.76,0,.2,1)';
+  const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+  const params = new URLSearchParams(location.search);
+  if (params.has('film')) document.documentElement.classList.add('film');
+  const scene = $('.scene'), stage = $('.stage'), timeline = $('.timeline');
+  let animations = [], raf = 0, running = false, baseTime = 0, start = 0, reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const K = (ms, values, easing) => ({offset:ms/duration,...values,...(easing?{easing}:{})});
+  function animate(target, frames) {
+    const node = typeof target === 'string' ? $(target) : target;
+    const animation = node.animate(frames,{duration,fill:'both',easing:'linear'});
+    animation.pause();animation.currentTime=0;animations.push(animation);
+  }
+  function fit(){scene.style.transform=`scale(${stage.clientWidth/1280},${stage.clientHeight/800})`;}
+  new ResizeObserver(fit).observe(stage);fit();
+  $('.word').replaceChildren(...[...'Stringmoon'].map(letter=>{const span=document.createElement('span');span.textContent=letter;return span;}));
+  [[405,218],[817,177],[893,381],[368,437],[822,465],[482,130],[930,265]].forEach(([x,y],i)=>{
+    const s=document.createElement('div');s.className='star';s.style.left=x+'px';s.style.top=y+'px';s.dataset.delay=i;scene.insertBefore(s,$('.hero'));
+  });
+  function build(){
+    animations.forEach(a=>a.cancel());animations=[];
+    if(reduced){
+      animate('.app-screen',[K(0,{opacity:0}),K(250,{opacity:0}),K(650,{opacity:1}),K(duration,{opacity:1})]);
+      animate('.hero',[K(0,{opacity:1,transform:'scale(.63)'}),K(300,{opacity:1,transform:'scale(.63)'}),K(650,{opacity:0,transform:'scale(.63)'}),K(duration,{opacity:0,transform:'scale(.63)'})]);
+      animate('.girl',[K(0,{opacity:1}),K(duration,{opacity:1})]);
+      animate('.moon-reveal',[K(0,{opacity:1}),K(duration,{opacity:1})]);
+      return;
+    }
+    animate('.atmosphere',[K(0,{opacity:0}),K(900,{opacity:1}),K(2450,{opacity:1}),K(3180,{opacity:0})]);
+    animate('.seed',[K(0,{opacity:0,transform:'scale(0)'}),K(140,{opacity:1,transform:'scale(1.1)'}),K(380,{opacity:1,transform:'scale(.65)'}),K(700,{opacity:0,transform:'scale(.2)'})]);
+    animate('.plucked-string',[K(0,{opacity:0,transform:'scaleX(0)'}),K(90,{opacity:0,transform:'scaleX(.02)',},easeOut),K(390,{opacity:.9,transform:'scaleX(1)'}),K(630,{opacity:0,transform:'scaleX(.94)'})]);
+    animate('.wave',[K(0,{opacity:0,transform:'scaleY(.1)'}),K(190,{opacity:0,transform:'scaleY(.1)'}),K(330,{opacity:.65,transform:'scaleY(1)'}),K(670,{opacity:0,transform:'scaleY(.04)'})]);
+    animate('.ring-track',[K(0,{strokeDashoffset:1006,opacity:0}),K(270,{strokeDashoffset:1006,opacity:.7},easeOut),K(1120,{strokeDashoffset:0,opacity:.65}),K(2300,{strokeDashoffset:0,opacity:.6}),K(2750,{strokeDashoffset:0,opacity:0})]);
+    animate('.ring',[K(0,{opacity:0,transform:'rotate(-160deg) scale(.78)'}),K(270,{opacity:1,transform:'rotate(-160deg) scale(.78)'},easeOut),K(1170,{opacity:1,transform:'rotate(-90deg) scale(1)'}),K(2350,{opacity:.8,transform:'rotate(-70deg) scale(1.035)'}),K(2800,{opacity:0,transform:'rotate(-48deg) scale(1.16)'})]);
+    animate('.ring .lit',[K(0,{strokeDashoffset:1006}),K(270,{strokeDashoffset:1006},easeOut),K(1400,{strokeDashoffset:-150}),K(2380,{strokeDashoffset:-300}),K(2800,{strokeDashoffset:-430})]);
+    animate('.halo',[K(0,{opacity:0,transform:'scale(.7)'}),K(580,{opacity:0,transform:'scale(.7)'},easeOut),K(1420,{opacity:1,transform:'scale(1)'}),K(2300,{opacity:.85,transform:'scale(1.03)'}),K(2900,{opacity:0,transform:'scale(1.15)'})]);
+    animate('.moon',[K(0,{opacity:0,transform:'translateY(26px) scale(.78)'}),K(330,{opacity:0,transform:'translateY(26px) scale(.78)'},easeOut),K(1100,{opacity:1,transform:'translateY(0px) scale(1)'}),K(2240,{opacity:1,transform:'translateY(0px) scale(1)'}),K(2840,{opacity:0,transform:'translateY(0px) scale(.58)'},flow),K(duration,{opacity:0,transform:'translateY(0px) scale(.58)'})]);
+    $$('.moon-band').forEach((band,i)=>animate(band,[K(0,{transform:`translateY(${16+i*5}px)`,opacity:0}),K(390+i*45,{transform:`translateY(${16+i*5}px)`,opacity:0},easeOut),K(1000+i*42,{transform:'translateY(0px)',opacity:1})]));
+    animate('.girl',[K(0,{opacity:0,transform:'translate(8px,22px)'}),K(620,{opacity:0,transform:'translate(8px,22px)'},easeOut),K(1370,{opacity:1,transform:'translate(0px,0px)'}),K(2280,{opacity:1,transform:'translate(0px,0px)'}),K(2720,{opacity:0,transform:'translate(0px,-6px)'})]);
+    animate('.orbital-space',[K(0,{opacity:0,transform:'rotate(-26deg) scale(.68)'}),K(450,{opacity:0,transform:'rotate(-26deg) scale(.68)'},easeOut),K(1400,{opacity:.85,transform:'rotate(-19deg) scale(1)'}),K(2260,{opacity:.65,transform:'rotate(-16deg) scale(1.025)'}),K(2700,{opacity:0,transform:'rotate(-12deg) scale(1.1)'})]);
+    $$('.star').forEach((star,i)=>animate(star,[K(0,{opacity:0,transform:'scale(.4)'}),K(900+i*60,{opacity:0,transform:'scale(.4)'}),K(1450+i*30,{opacity:i%2?.36:.16,transform:'scale(1)'}),K(2320,{opacity:.16,transform:'scale(1)'}),K(2690,{opacity:0,transform:'scale(.5)'})]));
+    $$('.word span').forEach((span,i)=>animate(span,[K(0,{opacity:0,transform:'translateY(18px)'}),K(980+i*30,{opacity:0,transform:'translateY(18px)'},easeOut),K(1600+i*22,{opacity:1,transform:'translateY(0px)'}),K(2280+i*8,{opacity:1,transform:'translateY(0px)'}),K(2680+i*8,{opacity:0,transform:'translateY(-12px)'})]));
+    animate('.sub',[K(0,{opacity:0,transform:'translateY(7px)'}),K(1450,{opacity:0,transform:'translateY(7px)'},easeOut),K(1950,{opacity:1,transform:'translateY(0px)'}),K(2360,{opacity:1,transform:'translateY(0px)'}),K(2710,{opacity:0,transform:'translateY(-5px)'})]);
+    animate('.bottom-signature',[K(0,{opacity:0}),K(1450,{opacity:0}),K(1950,{opacity:1}),K(2250,{opacity:1}),K(2630,{opacity:0})]);
+    animate('.vinyl',[K(0,{opacity:0,transform:'scale(.55) rotate(-30deg)'}),K(2250,{opacity:0,transform:'scale(.55) rotate(-30deg)'},easeOut),K(2670,{opacity:.95,transform:'scale(1) rotate(0deg)'}),K(2920,{opacity:.8,transform:'scale(1) rotate(10deg)'}),K(3330,{opacity:0,transform:'scale(1) rotate(20deg)'})]);
+    animate('.hero',[K(0,{opacity:1,transform:'translate(0px,0px) scale(1)'}),K(2320,{opacity:1,transform:'translate(0px,0px) scale(1)'},flow),K(2990,{opacity:1,transform:'translate(-220px,-70px) scale(.62)'}),K(3400,{opacity:0,transform:'translate(-220px,-70px) scale(.62)'})]);
+    animate('.app-screen',[K(0,{opacity:0,transform:'translateY(4px) scale(1.006)'}),K(2910,{opacity:0,transform:'translateY(4px) scale(1.006)'},easeOut),K(3600,{opacity:1,transform:'translateY(0px) scale(1)'})]);
+  }
+  function update(t){
+    timeline.value=t;timeline.style.setProperty('--progress',`${t/duration*100}%`);$('.time').textContent=`${(t/1000).toFixed(2)} / 3.60 s`;
+    $('.play').innerHTML=running?'<svg viewBox="0 0 24 24"><path d="M9 5v14M15 5v14" stroke-width="2"/></svg>':'<svg viewBox="0 0 24 24"><path class="filled" d="m8 5 11 7-11 7z"/></svg>';
+    $('.play').setAttribute('aria-label',running?'暂停预览':'播放预览');
+    const chapter=t<600?0:t<1650?1:t<2450?2:3;$$('.chapter').forEach((c,i)=>c.classList.toggle('active',i===chapter));
+    $('.skip').hidden=t>=duration;
+  }
+  function current(){return Math.min(duration,Math.max(0,running?baseTime+performance.now()-start:baseTime));}
+  function tick(){const t=current();update(t);if(t>=duration){running=false;baseTime=duration;update(t);raf=0;return;}raf=requestAnimationFrame(tick);}
+  function pause(){baseTime=current();running=false;cancelAnimationFrame(raf);raf=0;animations.forEach(a=>{a.pause();a.currentTime=baseTime});update(baseTime);}
+  function seek(t){pause();baseTime=Math.max(0,Math.min(duration,t));animations.forEach(a=>a.currentTime=baseTime);update(baseTime);}
+  function play(){if(running)return;if(baseTime>=duration)seek(0);running=true;start=performance.now();animations.forEach(a=>{a.currentTime=baseTime;a.play()});cancelAnimationFrame(raf);raf=requestAnimationFrame(tick);update(baseTime);}
+  function replay(){seek(0);play();}
+  $('.play').onclick=()=>running?pause():play();$('.replay').onclick=replay;timeline.oninput=()=>seek(Number(timeline.value));$('.skip').onclick=()=>seek(duration);
+  $$('.chapter').forEach(button=>button.onclick=()=>seek(Number(button.dataset.time)));
+  function setReduced(value){pause();reduced=value;$('.mode').setAttribute('aria-pressed',String(reduced));build();seek(0);play();}
+  $('.mode').onclick=()=>setReduced(!reduced);
+  document.addEventListener('keydown',e=>{if(e.target.matches('input,button'))return;if(e.code==='Space'){e.preventDefault();running?pause():play();}if(e.key.toLowerCase()==='r')replay();if(e.key==='Escape')seek(duration);});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)pause();});
+  window.motionPreview={seek,play,pause,replay,setReduced,duration,get state(){return {time:current(),running,reduced,animationCount:animations.length,frameScheduled:Boolean(raf)}}};
+  build();$('.mode').setAttribute('aria-pressed',String(reduced));seek(Number(params.get('t')||0));
+  $('.app-screen').decode().catch(()=>{}).then(()=>{window.previewReady=true;if(!params.has('t'))setTimeout(play,300);});
+})();
+</script>
+</body>
+</html>

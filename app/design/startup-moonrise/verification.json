@@ -1,0 +1,26 @@
+{
+  "errors": [],
+  "phases": 8,
+  "screenSizes": [
+    {
+      "width": 900,
+      "height": 600,
+      "scrollX": false,
+      "scrollY": false
+    },
+    {
+      "width": 1280,
+      "height": 800,
+      "scrollX": false,
+      "scrollY": false
+    }
+  ],
+  "completedState": {
+    "time": 3600,
+    "running": false,
+    "reduced": false,
+    "animationCount": 41,
+    "frameScheduled": false
+  },
+  "reducedMotion": "1"
+}

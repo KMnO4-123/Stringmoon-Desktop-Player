@@ -1,0 +1,5 @@
+const { app } = require('electron')
+const path = require('node:path')
+app.getAppPath = () => path.resolve(__dirname,'../..')
+app.setPath('userData',path.resolve(__dirname,'../../.smoke/startup-profile'))
+require('../../out/main/index.js')

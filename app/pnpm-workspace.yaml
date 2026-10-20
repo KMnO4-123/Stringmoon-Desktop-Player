@@ -1,0 +1,20 @@
+allowBuilds:
+  esbuild: true
+  electron: true
+  electron-winstaller: true
+minimumReleaseAgeExclude:
+  - electron@44.7.2
+  - electron@44.7.2
+onlyBuiltDependencies:
+  - esbuild
+  - electron
+
+# electron-builder 26.15.3 的 app-builder-lib 源码引用 @electron/get 的
+# ElectronDownloadCacheMode（3.1.x 才导出），而 lockfile 里被 electron 锁到 3.0.0。
+# 统一抬到 3.1.0（仍是 CJS，兼容主进程 require）。
+overrides:
+  '@electron/get': 3.1.0
+
+# Electron 二进制走 npmmirror 镜像（本机 GitHub CDN 被墙）
+electron_mirror: https://npmmirror.com/mirrors/electron/
+electron_builder_binaries_mirror: https://npmmirror.com/mirrors/electron-builder-binaries/

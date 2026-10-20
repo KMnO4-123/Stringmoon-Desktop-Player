@@ -1,0 +1,1272 @@
+{
+  "_comment": "DESIGN-A 8 handover. Real state event sequences captured from the engine, including a genuine degradation, so C2 can be rendered from real data instead of hand-made fixtures.",
+  "_generatedAt": "2026-10-15T05:07:58.653Z",
+  "_exe": "<repo>\\engine\\bin\\twilight-engine.exe",
+  "_library": "D:\\Music\\",
+  "_note": "degradeReason is human-readable by contract: it is displayed verbatim.",
+  "_contains": {
+    "degradations": 1,
+    "xrunEvents": 0,
+    "dspActiveSeen": true,
+    "note": "xrunEvents is 0 when no underrun occurred during the capture; the event shape is declared in the contract either way."
+  },
+  "capabilities": {
+    "exclusive": true,
+    "shared": true,
+    "resampler": true,
+    "bitPerfect": true,
+    "dsp": true,
+    "queue": true,
+    "seek": true
+  },
+  "devices": [
+    {
+      "id": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "name": "扬声器 (Audio Device)",
+      "isDefault": true,
+      "isBluetooth": false,
+      "channels": 2,
+      "sampleRate": 48000,
+      "hasExclusive": true,
+      "exclusiveFormats": [
+        "48000:16",
+        "48000:24"
+      ]
+    }
+  ],
+  "events": [
+    {
+      "ev": "ready",
+      "protocol": 1,
+      "version": "0.1.0",
+      "devices": [
+        {
+          "id": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+          "name": "扬声器 (Audio Device)",
+          "isDefault": true,
+          "isBluetooth": false,
+          "channels": 2,
+          "sampleRate": 48000,
+          "hasExclusive": true,
+          "exclusiveFormats": [
+            "48000:16",
+            "48000:24"
+          ]
+        }
+      ]
+    },
+    {
+      "ev": "scan_progress",
+      "done": 0,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 1,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 2,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 3,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 4,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 5,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 6,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 7,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 8,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 9,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 10,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 11,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 12,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 13,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 14,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 15,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 16,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 17,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 18,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 19,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 20,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 21,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 22,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 23,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 24,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 25,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 26,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 27,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 28,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 29,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 30,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 31,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 32,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 33,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 34,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 35,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 36,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 37,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 38,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 39,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 40,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 41,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 42,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 43,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 44,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 45,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 46,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 47,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 48,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 49,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 50,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 51,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 52,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 53,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 54,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 55,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 56,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 57,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 58,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 59,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 60,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 61,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 62,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 63,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 64,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 65,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 66,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 67,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 68,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 69,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 70,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 71,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 72,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 73,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 74,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 75,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 76,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 77,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 78,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 79,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 80,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 81,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 82,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 83,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 84,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 85,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 86,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 87,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 88,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 89,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 90,
+      "total": 91
+    },
+    {
+      "ev": "scan_progress",
+      "done": 91,
+      "total": 91
+    },
+    {
+      "ev": "scan_done",
+      "added": 91,
+      "failed": 0
+    },
+    {
+      "ev": "state",
+      "state": "stopped",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "position",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 10,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": true,
+      "dspModules": [
+        "eq"
+      ],
+      "renderStarved": 0
+    },
+    {
+      "ev": "position",
+      "trackId": "tl_0011",
+      "positionMs": 110,
+      "durationMs": 169477
+    },
+    {
+      "ev": "position",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 220,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "position",
+      "trackId": "tl_0011",
+      "positionMs": 330,
+      "durationMs": 169477
+    },
+    {
+      "ev": "state",
+      "state": "paused",
+      "trackId": "tl_0011",
+      "positionMs": 430,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "stopped",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "exclusive",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": true,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 6,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "exclusive",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": true,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 6,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 0
+    },
+    {
+      "ev": "position",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477
+    },
+    {
+      "ev": "position",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477
+    },
+    {
+      "ev": "position",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477
+    },
+    {
+      "ev": "position",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477
+    },
+    {
+      "ev": "log",
+      "level": "warn",
+      "message": "exclusive output produced no audio; falling back to shared"
+    },
+    {
+      "ev": "state",
+      "state": "paused",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "exclusive",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": true,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 6,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 1
+    },
+    {
+      "ev": "state",
+      "state": "playing",
+      "trackId": "tl_0011",
+      "positionMs": 0,
+      "durationMs": 169477,
+      "volume": 1,
+      "outputMode": "shared",
+      "sampleRate": 48000,
+      "bitDepth": 24,
+      "channels": 2,
+      "bitPerfect": false,
+      "resampled": false,
+      "sourceSampleRate": 48000,
+      "degradeReason": "the exclusive stream produced no audio (the device never signalled its buffer); fell back to shared",
+      "deviceId": "{0.0.0.00000000}.{10ecfbb1-44d4-43b7-8e83-84711e2fa8ef}",
+      "deviceName": "扬声器 (Audio Device)",
+      "periodMs": 10,
+      "xrunCount": 0,
+      "dspActive": false,
+      "dspModules": [],
+      "renderStarved": 1
+    },
+    {
+      "ev": "position",
+      "trackId": "tl_0011",
+      "positionMs": 20,
+      "durationMs": 169477
+    }
+  ]
+}
