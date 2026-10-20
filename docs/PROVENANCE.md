@@ -566,6 +566,75 @@ git clone --depth 1 https://github.com/Moekotori/ECHO.git <临时目录>/echo-sr
 
 ---
 
+---
+
+## English summary (for non-Chinese readers)
+
+The full provenance audit below is written in Chinese. This is the condensed English version; every figure
+quoted here was measured on 2026-10-20 and can be reproduced with the commands in Appendix A.
+
+**Question.** Which parts of Stringmoon are an independent implementation, which are informed by other
+projects, and which (if any) are copied?
+
+**Answer.**
+
+| Question | Answer |
+|---|---|
+| Any AGPL-3.0 code (Folia / ECHO) in this repository? | **None found** (confidence 0.80) |
+| Any Apache-2.0 code (Twilight_Echo / QueMusic) copied? | **No file-level or block-level copying found**; parameter-level references and "processing order" ideas are credited by name in the source comments |
+| Is the engine and the main process an independent implementation? | **Yes.** The engine is named **Moonwave**; 59 C++ sources and 138 TS/TSX sources. Excluding `#include` boilerplate, **4.63%** of effective code lines coincide with upstream — the longest contiguous match is a struct field declaration block (`std::string title;` …) |
+| Can this be published under MIT? | **Yes.** Own code is MIT; the LGPL obligations are met via `THIRD-PARTY-NOTICES.md` §4 |
+
+**Measured overlap with upstream `audio-engine`** (the numbers behind "independent implementation"):
+
+```text
+corpus      : our engine/src (59 files) × upstream Twilight_Echo-main/audio-engine (281 files)
+normalisation: strip line comments, collapse whitespace, drop blank/≤12-char lines,
+               drop preprocessing lines (#include / #pragma / #define …)
+result      : 11,641 effective code lines; 539 lines identical to upstream = 4.63%
+              contiguous runs of ≥3 lines: only 10, longest 6 lines
+```
+
+The longest run is exactly the field block above — a data shape every music player must have, which is
+idea/interface shape rather than protected expression. Most of the remaining runs are declarations such as
+`int sampleRate = 0;` or generic control flow like `reader.close(); return false;`.
+
+> ⚠️ **A trap worth recording** (this audit fell into it): without dropping `#include` lines, `json.hpp`
+> measures as "13 contiguous lines identical to upstream" — those 13 lines are all standard-library
+> headers like `#include <string>`, which have nothing to do with hand-written code. Any such comparison
+> must strip boilerplate first, or the number means nothing.
+
+**Why the missing 95.37% is genuinely different:**
+
+| Subsystem | Ours | Upstream |
+|---|---|---|
+| Decoding | dr_flac / dr_wav / dr_mp3 + stb_vorbis + Media Foundation | FFmpeg (a completely different dependency stack) |
+| Output | `output_wasapi.cpp`: one file for shared + exclusive | split across several backend files |
+| JSON | hand-written header-only protocol codec (`json.hpp`, stable member order) | a different implementation |
+| DSP | 10-band RBJ + ReplayGain + limiter + convolution, parameters from SPEC 3.4 | similar goal, same published formula source (RBJ Cookbook) |
+| Self-tests | `app_selftest.cpp` 124 KB + 23-step `drive.mjs` acceptance | a different test approach |
+
+**Naming and attribution.** The audio engine is called **Moonwave**; its build artifact is still
+`engine/bin/twilight-engine.exe` — renaming the binary would ripple through the packaging chain
+(`extraResources`, the main process's probe paths, every acceptance script) for no benefit, so only the
+name changed, not the file name.
+
+The README's **License and credits** section separates three tiers explicitly — *quoted* (data, documents
+and algorithm literature), *learned from* (design ideas and parameters, rewritten) and *read for orientation*
+(shaped judgement only) — because each tier carries different obligations.
+
+**Honest limits of this audit.**
+
+- The ECHO comparison has no source checkout on this machine; the strongest available evidence is its
+  packaged JS bundle plus 10 source files. Copying inside a bundled, renamed artefact cannot be observed
+  directly, which is why that conclusion is capped at 0.80 rather than higher.
+- QueMusic has no local source snapshot, so no line-level comparison was performed; the relationship is
+  recorded as "credited design reference in source comments".
+- Comparison finds *identical lines*; it cannot prove that an idea was never taken. It bounds code copying,
+  not influence.
+
+---
+
 ## 附录 A：复现本审计的命令
 
 ```powershell
