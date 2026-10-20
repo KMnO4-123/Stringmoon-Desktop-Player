@@ -10,6 +10,24 @@ import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
 
 const require = createRequire(import.meta.url)
+
+// 与 frequency-native.test.mjs 同一个坑：Windows 上 electron.exe 可能被 Defender /
+// 索引服务短暂占用，两个测试文件并行 spawn 时会直接 EBUSY。只对启动竞争重试，
+// 用例本身的断言失败必须立刻冒泡。
+async function runElectron(script, options) {
+  const delays = [0, 250, 750, 1500]
+  let lastError
+  for (const delay of delays) {
+    if (delay) await new Promise((resolve) => setTimeout(resolve, delay))
+    try {
+      return await promisify(execFile)(require('electron'), [script], options)
+    } catch (error) {
+      lastError = error
+      if (error?.code !== 'EBUSY' && !/EBUSY/.test(String(error?.message))) throw error
+    }
+  }
+  throw lastError
+}
 test('native artwork decoding rejects corrupt images, reads embedded covers and persists valid local selections', { timeout: 30000 }, async () => {
   const folder = await mkdtemp(path.join(tmpdir(), 'twilight-artwork-'))
   const tools = fileURLToPath(new URL('../.smoke/artwork-test/', import.meta.url))
@@ -61,7 +79,7 @@ app.whenReady().then(async () => {
 });`)
   const env = { ...process.env }; delete env.ELECTRON_RUN_AS_NODE
   try {
-    const { stdout } = await promisify(execFile)(require('electron'), [path.join(tools, 'runner.cjs')], { env, windowsHide: true, timeout: 25000 })
+    const { stdout } = await runElectron(path.join(tools, 'runner.cjs'), { env, windowsHide: true, timeout: 25000 })
     assert.ok(stdout.includes('ARTWORK_NATIVE_OK'))
   } finally {
     const target = path.resolve(folder)

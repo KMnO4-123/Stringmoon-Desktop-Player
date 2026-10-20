@@ -11,6 +11,25 @@ import ts from 'typescript'
 const require = createRequire(import.meta.url)
 const execFileAsync = promisify(execFile)
 
+// Windows 上 electron.exe 会被 Defender / 索引服务短暂占用，两个测试文件并行时
+// spawn 可能直接 EBUSY（首次 CI 就撞上了）。这不是断言失败，而是启动竞争：
+// 短暂退避后重试即可，不要让一次文件锁竞争把整个套件判红。
+async function runElectron(script, options) {
+  const delays = [0, 250, 750, 1500]
+  let lastError
+  for (const delay of delays) {
+    if (delay) await new Promise((resolve) => setTimeout(resolve, delay))
+    try {
+      return await execFileAsync(require('electron'), [script], options)
+    } catch (error) {
+      lastError = error
+      // 只有 spawn 层面的失败才重试；用例本身抛错要立刻冒泡，不能被重试掩盖。
+      if (error?.code !== 'EBUSY' && !/EBUSY/.test(String(error?.message))) throw error
+    }
+  }
+  throw lastError
+}
+
 // This exercises Chromium's actual Web Audio implementation in a hidden window.
 // No engine process, device output, mocked Biquad or audible AudioContext is used.
 test('native peaking response honors center gain, Q, headroom and the Nyquist bypass', { timeout: 30000 }, async () => {
@@ -60,7 +79,7 @@ app.whenReady().then(async () => {
   const env = { ...process.env }
   delete env.ELECTRON_RUN_AS_NODE
   try {
-    const { stdout } = await execFileAsync(require('electron'), [script], { env, windowsHide: true, timeout: 20000 })
+    const { stdout } = await runElectron(script, { env, windowsHide: true, timeout: 20000 })
     const line = stdout.split(/\r?\n/).find(line => line.startsWith('NATIVE_RESPONSE_RESULT:'))
     assert.ok(line, 'hidden Chromium test returned its measurements')
     const values = JSON.parse(line.slice('NATIVE_RESPONSE_RESULT:'.length))
