@@ -21,8 +21,8 @@
 
 - 上游仓库：`https://github.com/Px-asen/Twilight_Echo`（原 `asenyarzc-cpu/Twilight_Echo`），v1.3.1，**Apache-2.0**。
 - 本机快照：`<本地工作区>\.scratch\twilight-echo-ref\Twilight_Echo-main`（`codeload` zip，28.4 MB）。
-- 侦察报告：[UPSTREAM-AUDIT.md](../.scratch/discover-port/UPSTREAM-AUDIT.md)（378 行，全 file:line）
-  与 [OWN-AUDIT.md](../.scratch/discover-port/OWN-AUDIT.md)（自有项目现状，347 行）。
+- 侦察报告：`UPSTREAM-AUDIT.md`（378 行，全 file:line）与 `OWN-AUDIT.md`（自有项目现状，347 行）。
+  ⚠ 这两份位于本机 `.scratch/discover-port/`，属内部工作记录，**未随公开仓库发布**（`.scratch/` 在 `.gitignore` 内）。
 - **事实与实现分离**：只复刻「接口形状 / 参数范围 / 判据 / 交互模型」；**不复制**其 Vue/C++ 代码。
   许可边界：其 `audio-engine/` 内 vendored `dstdec` 是 LGPL-2.1+（上游自注未 relicense），本轮**完全未使用**；
   未使用其字体/图标/截图。
@@ -220,7 +220,7 @@ limiter 判据挂在 `get_state.dsp.limiter` 上、队列删除「标题出现�
 - 随包引擎：`resources/engine/bin/twilight-engine.exe` sha256 `f0ed5d93…1741ec0`（与构建产物逐字节一致，已核）
 - 更新清单：`app/release/latest.yml`（0.3.0）+ `.blockmap` + `SHA256SUMS.txt`
 - 独立验证报告：`.smoke/verify4/VERIFICATION-REPORT.md`
-- 侦察与计划：`.scratch/discover-port/{PLAN,UPSTREAM-AUDIT,OWN-AUDIT}.md`
+- 侦察与计划：本机 `.scratch/discover-port/{PLAN,UPSTREAM-AUDIT,OWN-AUDIT}.md`（内部工作记录，未随公开仓库发布）
 
 ## 9. 待人工确认（自动化测不了）
 
