@@ -1,8 +1,8 @@
 # Stringmoon
 
-**一个月光质感的 Windows 桌面音乐播放器：本地曲库 + 你自己的网易云 / QQ 音乐账号，配一台从头写的 C++20 音频引擎。**
+**一个高性能的 Windows HiFi 音乐播放器：本地曲库 + 你自己的网易云 / QQ 音乐账号，配一台高性能的 C++20 音频引擎 Moonwave。**
 
-WASAPI 独占 · 最高 384 kHz / 32 bit · 十段参数均衡 · SoXR 重采样 · 卷积房间校正 · EBU R128 响度
+WASAPI 独占直通 · 最高 384 kHz / 32 bit · bit-perfect · 十段参数均衡 · SoXR 重采样 · 卷积房间校正 · EBU R128 响度 · 设备热插拔恢复
 
 > **旧名 Twilight Echo。** 更名只发生在品牌层（窗口标题、排印、图标）；目录名 `app/`、`engine/` 与协议里的标识符一律保持原样。
 >
@@ -54,7 +54,7 @@ Stringmoon 是一个**用来听自己音乐的桌面播放器**。它的两条�
 |---|---|
 | 多曲库目录 | 曲库目录是**一组**而不是一个，记在用户数据里，重启原样复现；某个目录不见了（拔盘/删目录）只提示哪几个不可用，不影响其它目录 |
 | 扫描与标签 | 引擎用 TagLib 读标签与音频属性；容器按**内容**识别（魔数 / `ftyp` / `OggS` 页内编码标识），不按扩展名猜 |
-| 音频格式 | **自研解码**：FLAC、WAV、MP3、Ogg Vorbis、Ogg-FLAC（dr_libs / stb_vorbis）；**系统解码**：AAC / ALAC（`.m4a`，走 Windows Media Foundation）；**DSD**：DSF / DFF 抽取为 176.4 kHz / 24 bit PCM。`.opus` / `.wma` / `.ac3` / `.aif` 能否解取决于本机注册的 Media Foundation 组件，界面用能力矩阵如实显示「原生 / 系统解码 / 不支持」，而不是假装都能放 |
+| 音频格式 | **引擎内建解码**：FLAC、WAV、MP3、Ogg Vorbis、Ogg-FLAC（dr_libs / stb_vorbis）；**系统解码**：AAC / ALAC（`.m4a`，走 Windows Media Foundation）；**DSD**：DSF / DFF 抽取为 176.4 kHz / 24 bit PCM。`.opus` / `.wma` / `.ac3` / `.aif` 能否解取决于本机注册的 Media Foundation 组件，界面用能力矩阵如实显示「原生 / 系统解码 / 不支持」，而不是假装都能放 |
 | 封面 | 嵌入图 → 同名图 → `cover/folder/front` → 字形封面；可自选封面，**移除只删映射，不动你的图片与音乐文件** |
 | 标签编辑 | 可就地改标题 / 艺术家 / 专辑 / 流派 / 年份。修改只存进用户数据（`track-overrides.json`），**不改写你的音乐文件** |
 | 歌单与视图 | 歌单、文件夹视图（层级 / 面包屑 / 整树入队）、播放队列（拖拽、上下移、删除、清空、5 种排序） |
@@ -74,11 +74,13 @@ Stringmoon 是一个**用来听自己音乐的桌面播放器**。它的两条�
 
 > **GD 音乐台**是内置的第三方公共 HTTP 源（免登录取链），目前**已知有播放问题**，见 [已知限制](#已知限制与诚实边界)。
 
-### 音频引擎
+### 音频引擎 Moonwave
+
+> 引擎的构建产物文件名保持 `twilight-engine.exe`（仓库历史命名，改了会牵动打包链路），**Moonwave 是它的名字与版本线**。
 
 | 能力 | 说明 |
 |---|---|
-| 独立进程 | `twilight-engine.exe`，C++20 + CMake，与 Electron 只通过 stdin/stdout 的 JSON Lines 通信；音频样本**永不**穿过这条通道 |
+| 独立进程 | `twilight-engine.exe`（Moonwave），C++20 + CMake，与 Electron 只通过 stdin/stdout 的 JSON Lines 通信；音频样本**永不**穿过这条通道 |
 | 输出模式 | WASAPI **独占**（按曲目原生采样率/位深直通）与**共享**，独占不可用时自动降级并在界面如实标注，不假装成功 |
 | 采样率档位 | 跟随源 / 44.1 / 48 / 88.2 / 96 / 176.4 / 192 / 352.8 / 384 kHz。开发机实测：默认端点以独占 **384 kHz / 32 bit** 可真实打开（不同声卡上限不同，界面显示端点实测能力） |
 | 重采样 | SoXR 0.1.3 流式重采样（设备采样率与源不同时进入链路，此时如实标记「已重采样」） |
@@ -103,7 +105,7 @@ Stringmoon 是一个**用来听自己音乐的桌面播放器**。它的两条�
 
 ## 架构
 
-三个 OS 进程（应用的两个进程 + 引擎），两条进程边界（IPC 与 JSON Lines）：
+三个 OS 进程（应用的两个进程 + Moonwave 引擎），两条进程边界（IPC 与 JSON Lines）：
 
 ```text
 Electron 44 应用进程（app/）
@@ -118,7 +120,7 @@ Electron 44 应用进程（app/）
 
          │  stdin / stdout，一行一条 JSON（JSON Lines）        │  HTTP 127.0.0.1:<动态端口>
          ▼                                                    ▼
-  twilight-engine.exe                             本地 API 服务端子进程（可选）
+  twilight-engine.exe（Moonwave）                  本地 API 服务端子进程（可选）
   C++20 · 独立进程 · 唯一的声音权威                网易云 / QQ / Meting
   解码 → 重采样 → DSP → WASAPI 独占/共享
          │
@@ -278,7 +280,7 @@ engine\bin\twilight-engine.exe --probe-format <file>   # 这个文件到底能�
 │  ├─ tools/                  单测、Playwright 验收、mock 引擎、打包与更新脚本
 │  └─ electron-builder.yml    NSIS 打包与 extraResources（引擎 exe、内置运行环境）
 ├─ engine/                    C++20 音频引擎（v0.1.0）
-│  ├─ src/                    入口 / 协议 / 解码 / DSP / WASAPI / 设备与诊断
+│  ├─ src/                    入口 / 协议 / 解码 / DSP / WASAPI / 设备与诊断（Moonwave 引擎）
 │  ├─ third_party/            已入库的第三方源码（TagLib、SoXR、dr_libs 等）
 │  ├─ tools/                  fetch-deps.ps1、build.ps1、drive.mjs 验收套件、各类探针
 │  ├─ fixtures/               真实事件序列与曲库快照（供应用侧测试用）
@@ -323,17 +325,43 @@ engine\bin\twilight-engine.exe --probe-format <file>   # 这个文件到底能�
 
 ### 致谢
 
-本项目的架构决策与实现路径参考了以下公开项目，逐条溯源与置信度见 [`docs/PROVENANCE.md`](docs/PROVENANCE.md)：
+这个项目站在很多人的肩膀上。**下面把「引用 / 借鉴 / 参考」三档分开写清楚**，不是套话——
+每一档的法律后果和道德义务都不一样，混在一起说对谁都不公平。
 
-| 项目 | 许可 | 与本项目的关系 |
+#### 一、引用（引用数据、文档与算法文献；不含代码）
+
+| 来源 | 用途 | 说明 |
 |---|---|---|
-| [Px-asen/Twilight_Echo](https://github.com/Px-asen/Twilight_Echo) | Apache-2.0 | 同为 Electron + C++20 原生引擎的结构；其 `outputPerfect` 双状态模型被本项目采纳（可兼容地借鉴与改写） |
-| [BroNekoX/QueMusic](https://github.com/BroNekoX/QueMusic) | Apache-2.0 | `AudioDsp` 处理链的顺序与 auto-headroom 思路作为参考（Apache-2.0 允许借鉴，本项目按需改写） |
-| [chthollyphile/folia-major](https://github.com/chthollyphile/folia-major) | AGPL-3.0 | **仅作设计参考**（界面组织、平台接入方式、遥测与踩坑记录），**未复制其代码** |
-| [Moekotori/ECHO](https://github.com/Moekotori/ECHO) | AGPL-3.0 | **仅作设计参考**（会话状态机、播放器生命周期分层），**未复制其代码** |
+| [RBJ Audio EQ Cookbook](https://www.w3.org/TR/audio-eq-cookbook/)（Robert Bristow-Johnson） | 十段均衡的双二阶系数公式 | **公开文献的公式**，属于数学事实；引擎按它推导系数，非复制代码 |
+| [EBU R128](https://tech.ebu.ch/docs/r/r128.pdf) / ITU-R BS.1770 | 响度归一与真峰值的判据 | 标准文档给出的测量方法 |
+| [AutoEQ](https://github.com/jaakkopasanen/AutoEQ) 与 [Equalizer APO](https://sourceforge.net/projects/equalizerapo/) 的**导出格式** | 让用户能导入自己已有的耳机补偿曲线 | 只实现「读取它们的文件格式」这一互操作能力，**不含其代码与数据** |
+| [AMLL TTML DB](https://github.com/amll-dev/amll-ttml-db) 的 TTML 结构约定 | 支持逐字歌词的 `ttm:role` / 字级时间轴 | 只对齐格式规范 |
 
-> 说明：AGPL-3.0 项目在此仅作为**阅读与设计参考**，本仓库不包含其源代码，也不链接其产物。
-> 若你打算把本项目与上述项目合并分发，请自行核对各自的许可条款 —— 本仓库不对合并后的许可后果作任何判断。
+#### 二、借鉴（学习设计思路与参数，改写为自己的实现）
+
+| 项目 | 许可 | 借鉴了什么 | 边界 |
+|---|---|---|---|
+| [Px-asen/Twilight_Echo](https://github.com/Px-asen/Twilight_Echo) | Apache-2.0 | 同为 Electron + C++20 原生引擎的整体分层；`outputPerfect` 双状态模型（「降级不是错误」的表达方式）；能力自报 `capabilities` 的思路 | 逐行比对有效代码行重合 **4.63%**，最长连续重合段为 `std::string title;` 类字段声明，**无实现级复制** |
+| [BroNekoX/QueMusic](https://github.com/BroNekoX/QueMusic) | Apache-2.0 | `AudioDsp` 处理链的**顺序**与 auto-headroom 思路；其文档记录的两个坑（bypass 会连硬削一起跳过、限幅器关不等于不削波）被本引擎刻意规避 | 已在源码注释中点名出处（`engine/src/dsp.cpp` 文件头）；公式重写，未搬运代码 |
+| [Moekotori/ECHO](https://github.com/Moekotori/ECHO) | AGPL-3.0 | 会话状态机、播放器生命周期分层、遥测字段的设计取舍 | **仅读设计，未复制代码**（行级比对最长连续命中 5 行，均为 COM 强制签名） |
+| [chthollyphile/folia-major](https://github.com/chthollyphile/folia-major) | AGPL-3.0 | 界面组织与平台接入方式；其 issue 与踩坑记录省掉了大量试错 | **仅读设计，未复制代码**（12 个高嫌疑文件比对，最长连续命中 4 行） |
+| [yt-dlp](https://github.com/yt-dlp/yt-dlp) / [Navidrome](https://github.com/navidrome/navidrome) 的**问题记录** | Unlicense / GPL-3.0 | 在线源取链失败模式、Subsonic 协议的坑 | 只读 issue 与文档，未使用其代码 |
+
+#### 三、参考（只阅读、用来形成判断，不进入实现）
+
+| 来源 | 参考点 |
+|---|---|
+| [Electron](https://github.com/electron/electron) / [React](https://github.com/facebook/react) 官方文档 | 进程模型、`contextBridge`、渲染层性能边界 |
+| Windows WASAPI / IAudioClient3 文档 | 独占与共享的可用性判据、`AUDCLNT_E_*` 错误语义 |
+| [Nothing](https://nothing.tech/) 的品牌与 GDK 设计语言 | 三通道状态编码（光 / 形 / 字）的**思想**；未使用其受限资产 |
+| [Folia](https://github.com/chthollyphile/folia-major) / [ECHO](https://github.com/Moekotori/ECHO) 的公开讨论 | 「播放器该长什么样」的产品判断 |
+
+#### 四、必须说明的边界
+
+- **AGPL-3.0 项目（Folia / ECHO）在本仓库中只作为阅读与设计参考**：不包含其源代码，不链接其产物，未复制其表达性代码。
+  逐条比对证据（含最长连续命中行数与文件）见 [`docs/PROVENANCE.md`](docs/PROVENANCE.md) §3。
+- 若你打算把本项目与上述 AGPL 项目**合并分发**，请自行核对各自条款 —— 本仓库不对合并后的许可后果作任何判断。
+- **如果这里遗漏了某个应当署名的来源，请开 issue 指出来**：补一条致谢比争一个例外便宜得多。
 
 ---
 
@@ -342,4 +370,4 @@ engine\bin\twilight-engine.exe --probe-format <file>   # 这个文件到底能�
 - 本项目是**个人自用与学习性质**的软件，按「现状」提供，不附带任何明示或暗示的担保。
 - 本项目**不提供、不分发、不托管任何音乐内容**，也不提供绕过付费墙、DRM 或地区限制的能力。在线播放所取到的流全部来自你本人账号在对应平台的合法权限。
 - 网易云、QQ 音乐、GD 音乐台等第三方接口均为**非官方**通道，可能违反其服务条款，也可能随时失效。使用它们的一切后果与责任由使用者自行承担。
-- 请只使用**你自己的账号**，不要用本软件做批量抓取、刷量或任何破坏平台正常服务的行为。项目名称、界面与图标为原创；第三方组件版权归其各自作者所有。
+- 请只使用**你自己的账号**，不要用本软件做批量抓取、刷量或任何破坏平台正常服务的行为。项目名称、界面与图标由本项目创作；第三方组件与所借鉴的公开项目版权归其各自作者所有（见[许可与致谢](#许可与致谢)）。

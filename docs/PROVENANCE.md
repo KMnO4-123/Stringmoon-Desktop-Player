@@ -1,7 +1,7 @@
 # 溯源与许可边界（PROVENANCE）
 
 > **状态**：现行 · **日期**：2026-10-20 · **性质**：公开发布前的合规审计记录
-> **回答的问题**：Stringmoon 的代码里，**哪些是自研、哪些是借鉴、哪些是复制**？
+> **回答的问题**：Stringmoon 的代码里，**哪些是独立实现、哪些是借鉴、哪些是复制**？
 > 以及：能不能以 MIT 公开？
 
 本文是审计结论，不是法律意见。所有结论都附 **`file:line`** 或可复现命令；
@@ -15,13 +15,30 @@
 |---|---|
 | 是否有 AGPL-3.0 上游（Folia / ECHO）的**代码**进入本仓库？ | **未发现**（置信度 0.80） |
 | 是否有 Apache-2.0 上游（Twilight_Echo / QueMusic）的**代码**进入本仓库？ | **未发现整文件或整段复制**；有参数级引用与"处理顺序"借鉴，均已在源码注释中点名 |
-| 引擎与主进程是否为自研？ | **是**。59 个 C++ 源文件 + 138 个 TS/TSX 源文件，与上游对照无实现级重合 |
+| 引擎与主进程是否为独立实现？ | **是**。引擎独立命名为 **Moonwave**；59 个 C++ 源文件 + 138 个 TS/TSX 源文件；与上游 `audio-engine` 排除 `#include` 等样板后，有效代码行重合 **4.63%**，最长连续重合段是 `std::string title;` 一类结构体字段声明（详见 §4.1） |
 | 能否以 MIT 公开？ | **可以**。自有代码 MIT；LGPL 义务由 `THIRD-PARTY-NOTICES.md` §4 承担 |
 | 公开是否存在**许可**阻断？ | **无**。但存在两项与许可无关的**发布阻断**（真实凭证、个人绝对路径），见 §7 |
 
 置信度 0.80 而不是 0.95 的唯一原因写在 §6.2：**本机没有 ECHO 的源码副本**，
 只能拿安装产物的打包 JS 做间接比对。
 
+### 0.1 引擎的命名与归属（2026-10-20 起）
+
+音频引擎独立命名为 **Moonwave**。给引擎单独取名不是营销包装，而是为了把「谁写的」和
+「参考了谁」说清楚：一个没有名字的模块，在讨论归属时只能含糊地说「我们的引擎」。
+
+| 事项 | 口径 |
+|---|---|
+| 名字 | **Moonwave**（内部标识：`twilight-engine`） |
+| 构建产物 | 仍叫 `engine/bin/twilight-engine.exe` —— 改名会牵动打包链路（`electron-builder.yml` 的 `extraResources`、主进程探测路径、全部验收脚本），收益为零而风险实在，所以**只改称谓不改文件名** |
+| 由谁实现 | 本项目独立实现（见 §4.1 的量化比对） |
+| 借鉴了什么 | 见 README「许可与致谢」的「借鉴」一档：设计思路与参数顺序，逐条列出 |
+| 没有做什么 | **没有**移植、没有 fork、没有把上游文件改个名字放进来 |
+
+**为什么叫 Moonwave**：项目名叫 Stringmoon（弦月），引擎是让声音「流动」的那一层，
+wave 既是声波也是波形；与产品名同源，且不占用已有商标。
+
+---
 ---
 
 ## 1. 审计方法（可复现）
@@ -55,7 +72,8 @@
 ### 1.3 为什么"同样的写法"不等于"复制"
 
 本项目引擎与上游 Twilight_Echo 的 `audio-engine` 是**同一目标的两个独立实现**
-（都是 C++20 独立进程 + JSON 协议 + WASAPI）。同一个 Windows API 的调用序列必然高度相似：
+（都是 C++20 独立进程 + JSON 协议 + WASAPI）。同一个 Windows API 的调用序列必然高度相似，
+**这部分相似是 API 形状决定的，不是谁抄谁**：
 
 ```cpp
 // 我方 engine/src/devices.cpp 与上游 WasapiSharedBackend.cpp 都会有：
@@ -310,7 +328,7 @@ error instanceof Error ? error . message : String (
 
 ---
 
-## 4. 自研部分的规模证据
+## 4. 独立实现的规模与重合度证据
 
 | 维度 | 数量 |
 |---|---|
@@ -319,7 +337,7 @@ error instanceof Error ? error . message : String (
 | 引擎自测 | `--selftest` + `drive.mjs` 22 步 / 462 条断言（`engine/README.md:187`） |
 | 应用测试 | `pnpm test:app`、`test:c2`、`test:protocol`（31 断言）、`test:integration`（19 断言） |
 
-引擎的**自研判据**不靠主观判断，靠三项可验证的性质：
+引擎与上游的**独立性判据**不靠主观判断，靠三项可验证的性质（外加 §4.1 的量化重合度）：
 
 1. **契约驱动**：整套 JSON Lines 协议由 `CONTRACT.md`（21,378 B，冻结于 2026-10-14）定义，
    引擎与应用的实现都是照契约写的，与任何上游无关。
@@ -328,11 +346,54 @@ error instanceof Error ? error . message : String (
 3. **与上游实现的结构差异**（逐条可查）：
    - 我方：`output_wasapi.cpp` 单文件管共享+独占；ECHO：两个文件拆开。
    - 我方：`Seqlock` 用 byte-atomics；ECHO 用 `std::array<std::atomic<int>, N>`。
-   - 我方：`engine/src/meter.cpp` 自研 FFT 表 + kissfft；上游 Twilight_Echo 用
+   - 我方：`engine/src/meter.cpp` 内建 FFT 表 + kissfft；上游 Twilight_Echo 用
      `FftSpectrumAnalyzer.cpp`（448 行，不同实现）。
    - 我方：解码走 dr_flac/dr_wav/dr_mp3 + stb_vorbis + Media Foundation；上游 Twilight_Echo
      走 FFmpeg。**依赖栈完全不同**，这一条本身就排除了大范围代码复用。
 
+### 4.1 与上游 `audio-engine` 的量化重合度（2026-10-20 实测）
+
+上面三条是定性判据。为了让「独立实现」这句话可以被外部读者自己验，这里给出可复现的量化结果：
+
+```text
+语料：我方 engine/src（59 文件）  ×  上游 Twilight_Echo-main/audio-engine（281 文件）
+归一化：去行尾注释、折叠空白、丢弃空行与长度 ≤12 的行、丢弃 #include/#pragma/#define 等预处理行
+结果：我方有效代码行 11,641；与上游逐行相同 539 行 = 4.63%
+      连续 ≥3 行的片段仅 10 处，最长 6 行
+```
+
+**那 6 行最长连续片段长这样**（`engine/src/metadata.hpp` vs 上游 `core/AudioTypes.h`）：
+
+```cpp
+std::string title;
+std::string artist;
+std::string album;
+std::string albumArtist;
+std::string genre;
+std::string codec;
+```
+
+这是「一首歌有哪些字段」的数据形状——任何音乐播放器都必须有，属于**思想与接口形状**，
+版权不保护；它不构成表达层面的复制。其余连续片段也都是 `int sampleRate = 0;` 这类字段声明，
+或 `reader.close(); return false;` 这类通用控制流。
+
+> ⚠️ **一个容易误报的坑**（本审计自己踩过）：若**不排除** `#include` 行，`json.hpp` 会测出
+> 「连续 13 行与上游相同」——那 13 行全是 `#include <string>` 一类标准库头文件，
+> 与手写代码无关。做这类比对必须先剔除样板行，否则数字毫无意义。
+
+复现命令见[附录 A](#附录-a复现本审计的命令)。
+
+### 4.2 那 95.37% 不重合的部分是什么
+
+| 子系统 | 我方实现 | 上游对应物 |
+|---|---|---|
+| 解码 | dr_flac / dr_wav / dr_mp3 + stb_vorbis + Media Foundation | FFmpeg（依赖栈完全不同） |
+| 输出 | `output_wasapi.cpp` 单文件统一共享 + 独占 | 拆成多个 backend 文件 |
+| JSON | 自写 header-only 协议编解码（`json.hpp`，成员顺序稳定） | 不同实现 |
+| DSP | 10 段 RBJ + ReplayGain + 限幅 + 卷积，参数取自 SPEC 3.4 | 目标相近，公式同源（RBJ Cookbook 公开文献） |
+| 自测 | `app_selftest.cpp` 124 KB + `drive.mjs` 23 步验收 | 不同的测试体系 |
+
+---
 ---
 
 ## 5. 许可与依赖事实（摘要）
@@ -379,7 +440,7 @@ error instanceof Error ? error . message : String (
 | 无 Folia 代码复制 | **0.90** | 拉了 12 个高嫌疑文件做直接比对，最长游程 4 行、无业务语义命中 |
 | 无 Twilight_Echo 代码复制 | **0.88** | 全量快照（1,534 文件）直接比对，最长游程 11 行且为协议字段声明 |
 | 无 ECHO 代码复制 | **0.78** | **弱点所在**，见 §6.2 |
-| 引擎为自研 | **0.92** | 依赖栈不同 + 结构差异 + 462 条自测断言 + 契约驱动 |
+| 引擎为独立实现（非移植） | **0.92** | 依赖栈不同 + 结构差异 + 有效代码行重合 4.63% + 契约驱动 |
 | 可以 MIT 公开 | **0.95** | 依赖树无 copyleft 传染路径；LGPL 义务可满足 |
 
 **总体置信度 0.80**（取最弱一环加权）。
@@ -428,7 +489,7 @@ git clone --depth 1 https://github.com/Moekotori/ECHO.git <临时目录>/echo-sr
 
 三条展开：
 
-1. **采用 MIT。** 自有代码（`app/src`、`engine/src`、构建脚本、文档）全部原创，
+1. **采用 MIT。** 自有代码（`app/src`、`engine/src`、构建脚本、文档）为独立实现，
    没有必须继承的 copyleft。MIT 与依赖树（MIT / ISC / BSD / BSL / 0BSD / LGPL）**全部兼容**。
 2. **未发现 AGPL 派生证据，置信度 0.80。**
    已查范围：Folia 12 个高嫌疑源文件（约 2,600 有效行）直接比对、ECHO 10 个源文件 + 5.3 MB
@@ -518,8 +579,57 @@ Get-ChildItem <仓库根>\app\node_modules -Directory | ForEach-Object {
 node app\node_modules\.pnpm\@electron+asar@3.4.1\node_modules\@electron\asar\bin\asar.js `
   list app\release\win-unpacked\resources\app.asar
 
-# 3) 连续行游程比对（§1.2 判据 2 的核心，用 Python 或 node 实现均可）
-#    思路：剔除注释/空行 → 折叠空白 → 求最长连续命中，>5 行即人工复核
+# 3) 连续行游程比对（§1.2 判据 2 的核心）。下面这段是 §4.1 数字的实际来源，
+#    可直接跑：把 <上游快照> 指向 Twilight_Echo-main/audio-engine。
+$ErrorActionPreference = 'Stop'
+function Get-CodeLines([string]$dir) {
+  $map = @{}
+  Get-ChildItem $dir -Recurse -File -Include *.cpp,*.hpp,*.h,*.c |
+    Where-Object { $_.FullName -notmatch '\\build\\|\\node_modules\\' } | ForEach-Object {
+      $lines = Get-Content $_.FullName -Encoding UTF8 | ForEach-Object {
+        ($_ -replace '//.*
+
+# 4) 上游许可核实（GitHub API）
+Invoke-RestMethod https://api.github.com/repos/chthollyphile/folia-major | Select license
+Invoke-RestMethod https://api.github.com/repos/Moekotori/ECHO         | Select license
+
+# 5) 敏感路径扫描
+Get-ChildItem <仓库根> -Recurse -File -Include *.md,*.ts,*.tsx,*.cpp,*.json,*.yml |
+  Select-String -Pattern 'C:\\\\Users\\\\<用户名>|D:\\\\<个人目录>'
+```
+
+## 附录 B：本次审计读过的上游材料清单
+
+| 材料 | 用途 |
+|---|---|
+| `Twilight_Echo-main/`（全量快照，1,534 文件） | 精确行 + 游程比对 |
+| Folia `main` 12 文件（`qqTransport` / `qqProvider` / `neteaseProvider` / `parserCore` / `autoMatchBestLyric` / `sentenceLayout` / `providerLoginSession` / `providerAccountController` / `lyric-proxy` / `segment-lyrics` / `lyricApi` / `lyric-api.md`） | 精确行 + 游程比对 |
+| ECHO `main` 10 文件（`wasapi_shared.cpp` / `wasapi_exclusive.cpp` / `wasapi_diag.h` / `wasapi_timeout.h` / `PcmRingAudioSource.cpp` / `NativePlaybackPipeline.cpp` / `PlaybackSessionStore.ts` / `audioIpc.ts` / `AudioSessionTypes.ts` / `LyricsSettingsDrawer.tsx`） | 精确行 + 游程比对 |
+| ECHO NEXT 解析产物 `.scratch/echo-next/extracted/out__main__index.js`（5.3 MB） | 字符串字面量 + token 10-gram 碰撞 |
+| `.scratch/discover-port/UPSTREAM-AUDIT.md`（377 行） | 既有上游审计报告（本文件引用其 3 处结论） |
+| `docs/REFS-A-engine.md` / `REFS-A2-engine.md` / `REFS-B-app.md` / `REFS-B2-app.md` | 仓库自身的"只学模式"纪律记录 |
+| `docs/MASTER-v1-plan.md` / `MASTER-B-app.md` / `M3-v1-plan.md` / `PLATFORM-v1-provider-choice.md` | 许可表与"可抄/不可抄"的原始判断 |
+| `CONTRACT.md`（P1 前提）、`docs/SPEC-v2.1.md:106-109` | "只自用不分发"的原始语境 |
+
+---
+
+*本文与 `THIRD-PARTY-NOTICES.md` 共同构成 Stringmoon 的公开合规档案。
+发现遗漏请开 issue —— 补一条声明比争一个例外便宜得多。*
+,'') -replace '\s+',' '
+      } | Where-Object {
+        $_.Trim().Length -gt 12 -and $_ -notmatch '^\s*#(include|pragma|define|if|endif|else|undef|ifdef|ifndef)'
+      }
+      $map[$_.FullName] = @($lines | ForEach-Object { $_.Trim() })
+    }
+  return $map
+}
+$ours = Get-CodeLines '<仓库根>\engine\src'
+$up   = Get-CodeLines '<上游快照>\audio-engine'
+$upSet = New-Object System.Collections.Generic.HashSet[string]
+foreach ($f in $up.Values) { foreach ($l in $f) { [void]$upSet.Add($l) } }
+$ourTotal = 0; $hit = 0
+foreach ($f in $ours.Values) { foreach ($l in $f) { $ourTotal++; if ($upSet.Contains($l)) { $hit++ } } }
+'有效代码行={0} 重合={1} 比例={2:P2}' -f $ourTotal, $hit, ($hit / $ourTotal)
 
 # 4) 上游许可核实（GitHub API）
 Invoke-RestMethod https://api.github.com/repos/chthollyphile/folia-major | Select license

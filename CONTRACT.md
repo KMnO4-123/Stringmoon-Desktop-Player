@@ -33,7 +33,7 @@
 |---|---|---|
 | 外壳 | **Electron 44.x**（实测 44.7.2） | 主进程即完整 Node，API 服务端/扫码 MQTT 天然有位；自带 Chromium → blur/backdrop-filter 满血 |
 | 渲染层 | **TypeScript + React**（Chromium/WebView2 无关） | 动画实现力最强；可参考 Folia 的 React 实现思路（AGPL，自用无约束） |
-| 音频引擎 | **C++20 独立进程**（自研） | Rust 侧缺口见 §6；引擎必须独立进程，不能是同进程 native module |
+| 音频引擎 | **C++20 独立进程**（Moonwave，高性能架构） | Rust 侧缺口见 §6；引擎必须独立进程，不能是同进程 native module |
 | 平台层 | **Node/TS** + 第三方 API 服务端 | 生态在 Node（见 §6），别在 C++ 里写平台协议 |
 | 构建（引擎） | CMake + MSVC | 工具链见 §7 |
 | 曲库 | SQLite（引擎侧或主进程侧，见 §4 的边界） | 最小可用集即可，不上 FTS5/trigram 直到曲库真的变大 |

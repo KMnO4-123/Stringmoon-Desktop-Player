@@ -3,7 +3,7 @@
   "productName": "Stringmoon",
   "version": "0.4.1",
   "private": true,
-  "description": "Stringmoon — a moonlit desktop music player.",
+  "description": "Stringmoon — a high-performance HiFi music player for Windows.",
   "author": "Stringmoon",
   "license": "MIT",
   "main": "out/main/index.js",

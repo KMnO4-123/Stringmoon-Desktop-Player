@@ -201,7 +201,7 @@ int main(int argc, char** argv) {
             return te::runSpatialProbe(argc, argv);
         }
         if (std::strcmp(argv[i], "--version") == 0) {
-            std::string line = "twilight-engine ";
+            std::string line = "twilight-engine (Moonwave) ";
             line += te::kEngineVersion;
             line += '\n';
             std::fputs(line.c_str(), stderr);
@@ -209,7 +209,7 @@ int main(int argc, char** argv) {
         }
         if (std::strcmp(argv[i], "--help") == 0) {
             std::fprintf(stderr,
-                "twilight-engine - Twilight Echo audio engine (JSON Lines over stdio)\n"
+                "twilight-engine (Moonwave) - Stringmoon audio engine (JSON Lines over stdio)\n"
                 "  --selftest   run protocol codec checks and exit\n"
                 "  --probe-mf   list Media Foundation audio codecs; --probe-mf --write-tone <x.m4a>\n"
                 "  --version    print version and exit\n"

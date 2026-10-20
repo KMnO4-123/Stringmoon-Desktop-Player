@@ -1,6 +1,9 @@
-# twilight-engine
+# twilight-engine —— Moonwave 引擎
 
-Twilight Echo 的音频引擎。C++20，独立进程，通过 **JSON Lines over stdio** 与 Electron 应用通信。
+Stringmoon 的音频引擎，代号 **Moonwave**。C++20，独立进程，通过 **JSON Lines over stdio** 与 Electron 应用通信。
+
+> **关于名字**：引擎叫 Moonwave，构建产物是 `twilight-engine.exe`（历史命名，改名会牵动打包链路）。
+> 二者指同一个东西。
 
 > 版本：引擎与应用的版本号**独立演进**（当前引擎自报 `0.1.0`，应用 `0.4.0`）；
 > 二者靠冻结的协议版本号（`protocol: 1`）对齐，不靠应用版本号推断引擎版本。

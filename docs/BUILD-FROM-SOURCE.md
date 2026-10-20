@@ -207,7 +207,7 @@ node tools/release.mjs --dir          # 只出未安装目录，快速验证资�
 
 - 应用版本在 `app/package.json` 的 `version`（当前 0.4.0），安装包名与 `latest.yml` 都从它派生。
 - 引擎版本在 `engine/CMakeLists.txt` 的 `project(... VERSION 0.1.0)`，通过 `ready` 事件自报
-  （`twilight-engine 0.1.0`）。**两者不同步**，不要指望它们一致。
+  （`twilight-engine (Moonwave) 0.1.0`）。**两者不同步**，不要指望它们一致。
 - `appId`（`com.stringmoon.twilightecho`）**一经发布永不修改**：NSIS 的升级/卸载身份由它派生。
 
 ### 3.5 自托管自动更新（可选）
@@ -232,7 +232,7 @@ engine\bin\twilight-engine.exe --selftest
 
 # 2) 引擎版本自报
 engine\bin\twilight-engine.exe --version
-#    期望：twilight-engine 0.1.0
+#    期望：twilight-engine (Moonwave) 0.1.0
 
 # 3) 这个文件到底能不能播（最有用的一条：失败原因会打印出来）
 engine\bin\twilight-engine.exe --probe-format <某个音乐文件>
