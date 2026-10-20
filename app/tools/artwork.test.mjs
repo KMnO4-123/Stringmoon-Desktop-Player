@@ -18,6 +18,10 @@ test('native artwork decoding rejects corrupt images, reads embedded covers and 
   await writeFile(path.join(tools, 'reader.cjs'), ts.transpileModule(source, { compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.CommonJS, esModuleInterop: true } }).outputText)
   await writeFile(path.join(tools, 'runner.cjs'), `
 const { app, nativeImage } = require('electron');
+// 测试不需要 GPU：CI runner 没有显卡，GPU 进程启动失败会连带渲染进程崩溃。
+// 关掉硬件加速让 Chromium 走软件路径，本地与 CI 行为一致。
+app.disableHardwareAcceleration();
+app.commandLine.appendSwitch('disable-gpu');
 const fs = require('node:fs/promises'), path = require('node:path'), assert = require('node:assert/strict');
 const {readArtwork, setArtwork, configureArtwork} = require('./reader.cjs');
 const folder = ${JSON.stringify(folder)};

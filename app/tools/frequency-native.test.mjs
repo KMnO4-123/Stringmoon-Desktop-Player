@@ -44,6 +44,9 @@ test('native peaking response honors center gain, Q, headroom and the Nyquist by
   const directory = await mkdtemp(path.join(tmpdir(), 'twilight-frequency-'))
   const script = path.join(directory, 'native.cjs')
   await writeFile(script, `const { app, BrowserWindow } = require('electron');
+// 同 artwork.test.mjs：无 GPU 环境下必须关掉硬件加速，否则 GPU 进程启动失败会拖垮渲染进程。
+app.disableHardwareAcceleration();
+app.commandLine.appendSwitch('disable-gpu');
 app.setPath('userData', ${JSON.stringify(path.join(directory, 'profile'))});
 app.whenReady().then(async () => {
   const win = new BrowserWindow({show:false, webPreferences:{contextIsolation:true,sandbox:true}});

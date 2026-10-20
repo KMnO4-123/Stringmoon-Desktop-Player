@@ -67,11 +67,16 @@ jobs:
       - name: CSS check
         run: pnpm check:css
 
+      # 单测里有两条会真的拉起 Electron（artwork 原生解码、frequency 原生响应用来
+      # 验证浏览器与引擎实现一致）。GitHub 的 windows runner 没有 GPU，Chromium 的
+      # GPU 进程会启动失败并连带渲染进程崩溃；测试脚本已显式 disableHardwareAcceleration，
+      # 这里再给一份环境兜底，保证本地与 CI 走同一条软件渲染路径。
       - name: Unit tests
         run: pnpm test:app
         env:
           # 单测不联网：在线取词/流媒体在测试里被短路
           TWILIGHT_OFFLINE: "1"
+          ELECTRON_DISABLE_GPU: "1"
 
   # ── 引擎侧（手动触发）─────────────────────────────────────────────────
   # 注意：fetch-deps.ps1 会从 GitHub 下载 TagLib / SoXR / dr_libs 等第三方源码。
