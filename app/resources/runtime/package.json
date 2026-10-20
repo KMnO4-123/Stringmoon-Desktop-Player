@@ -1,0 +1,1 @@
+{"name":"stringmoon-runtime","private":true,"version":"1.0.0","description":"Bundled Node.js runtime + platform API servers for Stringmoon","dependencies":{"@neteasecloudmusicapienhanced/api":"^4.41.1","@yakult-green-tea/qq-music-api":"^3.3.2"}}

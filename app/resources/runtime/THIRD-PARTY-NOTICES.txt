@@ -1,0 +1,25 @@
+Stringmoon 内置运行环境 - 第三方组件声明
+=========================================
+
+本目录随 Stringmoon 安装包分发，用于在没有安装 Node.js 的电脑上启动在线音乐服务端。
+
+1) Node.js v24.19.0
+   许可：MIT（全文见 NODE-LICENSE.md，版权归 Node.js contributors 及 OpenJS Foundation）
+   来源：https://nodejs.org/
+
+2) @neteasecloudmusicapienhanced/api
+   许可：MIT（全文见 node_modules/@neteasecloudmusicapienhanced/api/LICENSE）
+   说明：非官方网易云音乐 API，仅用于技术研究与个人使用。
+
+3) @yakult-green-tea/qq-music-api
+   许可：MIT（全文见 node_modules/@yakult-green-tea/qq-music-api/LICENSE）
+   说明：非官方 QQ 音乐 API（Folia 同款后端），仅用于技术研究与个人使用。
+
+4) @unblockneteasemusic/server 0.28.0（经 node_modules 依赖树随包分发）
+   许可：LGPL-3.0-only（全文见 node_modules/@unblockneteasemusic/server/COPYING
+         与 COPYING.LESSER）
+   说明：以未压缩源码 + 依赖树形式分发，未打包成单文件；使用者可整目录替换该库。
+
+【重要提示】这些第三方接口均为非官方实现，与网易云音乐、腾讯 QQ 音乐无隶属或授权关系。
+使用者应自行遵守所在地区法律与平台服务条款；音乐内容的版权归各权利人所有。
+Stringmoon 仅按用户配置在本机启动这些服务端，不上传账号凭证。

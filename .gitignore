@@ -36,10 +36,16 @@ engine/third_party/**/*.exe
 Stringmoon-Setup-*.exe
 *.blockmap
 latest.yml
-app/resources/runtime/
 app/resources/runtime.zip
 app/resources/icon-archive/
 安装与使用说明-*.txt
+
+# 内置运行环境目录只收「许可与声明」这几份文本：它们是分发合规的一部分，
+# 必须随仓库走，否则别人重新打包会再次漏掉 LGPL 声明。
+app/resources/runtime/node_modules/
+app/resources/runtime/node.exe
+app/resources/runtime/package-lock.json
+app/resources/runtime/NODE-LICENSE.md.bak-*
 
 # ---------- QA / 冒烟 / 临时工作区（本机产生，含绝对路径与个人数据）----------
 .smoke/
